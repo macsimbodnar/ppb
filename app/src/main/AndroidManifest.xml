@@ -9,20 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+
+        <!-- Main Menu -->
         <activity
-            android:name=".app.MainMenuActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/app_name"
-            android:theme="@style/FullscreenTheme">
+            android:name=".app.MainMenuActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.HOME" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".app.GameActivity"></activity>
+
+        <!-- Game -->
+        <activity android:name=".app.GameActivity" />
     </application>
 
 </manifest>
