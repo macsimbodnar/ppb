@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.mazerfaker.pewpewboom.R;
-import com.mazerfaker.pewpewboom.view.Surface;
+import com.mazerfaker.pewpewboom.controller.Surface;
 
 public class GameActivity extends Activity {
 

@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 
 import com.mazerfaker.pewpewboom.util.Constants;
-import com.mazerfaker.pewpewboom.view.Surface;
 
 public class MainThread extends Thread {
 
@@ -43,8 +42,10 @@ public class MainThread extends Thread {
 
                 canvas = _surfaceHolder.lockCanvas();
                 synchronized( _surfaceHolder ) {
-                    //_surface.update();
+
+                    _surface.update();
                     _surface.draw(canvas);
+
                 }
 
             } catch (Exception e) {

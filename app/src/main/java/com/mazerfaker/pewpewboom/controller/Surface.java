@@ -1,12 +1,15 @@
-package com.mazerfaker.pewpewboom.view;
+package com.mazerfaker.pewpewboom.controller;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder.Callback;
 
-import com.mazerfaker.pewpewboom.controller.MainThread;
+import com.mazerfaker.pewpewboom.R;
+import com.mazerfaker.pewpewboom.model.characters.Ship;
 
 public class Surface extends SurfaceView implements Callback {
 
@@ -17,6 +20,8 @@ public class Surface extends SurfaceView implements Callback {
         super(context);
         getHolder().addCallback(this); // Important
         _mainThread = new MainThread(this);
+
+        _ship = new Ship(BitmapFactory.decodeResource(getResources(), R.drawable.ship));
     }
 
 
@@ -50,5 +55,18 @@ public class Surface extends SurfaceView implements Callback {
     }
 
 
-    MainThread _mainThread;
+    public void update() {
+
+    }
+
+
+    @Override
+    public void draw(Canvas canvas) {
+        super.draw(canvas);
+        _ship.draw(canvas);
+    }
+
+
+    private MainThread _mainThread;
+    private Ship _ship;
 }
