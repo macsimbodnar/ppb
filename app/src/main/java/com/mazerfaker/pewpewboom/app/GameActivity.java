@@ -2,6 +2,7 @@ package com.mazerfaker.pewpewboom.app;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -22,6 +23,8 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        _gameLayout = (ConstraintLayout) findViewById(R.id.game_container);
+
         init();
     }
 
@@ -31,21 +34,22 @@ public class GameActivity extends Activity {
      */
     private void init() {
 
-        final LinearLayout gameLayout = (LinearLayout) findViewById(R.id.game_layout);
-        ViewTreeObserver vto = gameLayout.getViewTreeObserver();
+        ViewTreeObserver vto = _gameLayout.getViewTreeObserver();
         vto.addOnGlobalLayoutListener (new ViewTreeObserver.OnGlobalLayoutListener() {
 
             @Override
             public void onGlobalLayout() {
-                gameLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                _gameLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
                 //Log.d(TAG, "SET SIZES W = " + width + "  H = " + height);
                 _app = App.getInstance();
-                _app.setWindowSize(gameLayout.getMeasuredWidth(), gameLayout.getMeasuredHeight());
+                Log.d(TAG, _app.toString());
+                _app.setWindowSize(_gameLayout.getMeasuredWidth(), _gameLayout.getMeasuredHeight());
+
+                initSurface();
 
                 setListeners();
 
-                initSurface();
             }
         });
     }
@@ -53,9 +57,8 @@ public class GameActivity extends Activity {
 
     private void initSurface() {
 
-        LinearLayout gameView = (LinearLayout) findViewById(R.id.game_layout);
         _surface = new Surface(getApplicationContext());
-        gameView.addView(_surface);
+        _gameLayout.addView(_surface);
     }
 
 
@@ -66,17 +69,18 @@ public class GameActivity extends Activity {
         LinearLayout right = (LinearLayout) findViewById(R.id.game_right);
 
 
-        // TODO left listener
         left.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
 
                 if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     Log.d(TAG, "LEFT DOWN");
+                    _app.moveLeft(true);
                 }
 
                 if(motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     Log.d(TAG, "LEFT UP");
+                    _app.moveLeft(false);
                 }
 
                 return true;
@@ -102,17 +106,18 @@ public class GameActivity extends Activity {
         });
 
 
-        // TODO right listener
         right.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
 
                 if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     Log.d(TAG, "RIGHT DOWN");
+                    _app.moveRight(true);
                 }
 
                 if(motionEvent.getAction() == MotionEvent.ACTION_UP) {
                     Log.d(TAG, "RIGHT UP");
+                    _app.moveRight(false);
                 }
 
                 return true;
@@ -121,6 +126,7 @@ public class GameActivity extends Activity {
     }
 
 
-    Surface _surface;
-    App _app;
+    private ConstraintLayout _gameLayout;
+    private Surface _surface;
+    private App _app;
 }

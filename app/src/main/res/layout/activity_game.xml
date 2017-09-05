@@ -4,17 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mazerfaker.pewpewboom.app.GameActivity">
+    tools:context="com.mazerfaker.pewpewboom.app.GameActivity"
+    android:id="@+id/game_container">
 
     <LinearLayout
         android:id="@+id/game_layout"
-        android:baselineAligned="false"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:baselineAligned="false"
         android:orientation="horizontal"
         android:weightSum="3"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,6 +34,7 @@
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@android:color/transparent"
             android:orientation="horizontal"
             android:visibility="visible">
 
@@ -42,6 +45,7 @@
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@android:color/transparent"
             android:orientation="horizontal">
 
         </LinearLayout>
@@ -51,6 +55,7 @@
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@android:color/transparent"
             android:orientation="horizontal">
 
         </LinearLayout>

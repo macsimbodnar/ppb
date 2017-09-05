@@ -13,7 +13,17 @@ public class Hitbox {
 
 
     public void update(float left, float top) {
-        _hitbox.set(left, top,  left + _width, top + _height);
+        _hitbox.offsetTo(left, top);
+    }
+
+
+    public void updateX(float left) {
+        _hitbox.offsetTo(left, _hitbox.top);
+    }
+
+
+    public void updateY(float top) {
+        _hitbox.offsetTo(_hitbox.left, top);
     }
 
 
