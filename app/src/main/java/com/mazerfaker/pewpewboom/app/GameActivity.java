@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.mazerfaker.pewpewboom.R;
+import com.mazerfaker.pewpewboom.view.Surface;
 
 public class GameActivity extends Activity {
 
@@ -18,6 +19,24 @@ public class GameActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        initSurface();
+
+        setListeners();
+
+
+    }
+
+
+    private void initSurface() {
+
+        LinearLayout gameView = (LinearLayout) findViewById(R.id.game_layout);
+        _surface = new Surface(getApplicationContext());
+        gameView.addView(_surface);
+    }
+
+
+    private void setListeners() {
 
         LinearLayout left = (LinearLayout) findViewById(R.id.game_left);
         LinearLayout center = (LinearLayout) findViewById(R.id.game_center);
@@ -76,6 +95,8 @@ public class GameActivity extends Activity {
                 return true;
             }
         });
-
     }
+
+
+    Surface _surface;
 }
