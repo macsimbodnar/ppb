@@ -80,7 +80,7 @@ public class MainThread extends Thread {
                 e.printStackTrace();
             }
 
-            Log.d(TAG, "CURRENT FRAME: " + _realFPS);
+            //Log.d(TAG, "CURRENT FRAME: " + _realFPS);
 
         }
 

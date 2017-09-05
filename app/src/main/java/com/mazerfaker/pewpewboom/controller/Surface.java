@@ -56,7 +56,7 @@ public class Surface extends SurfaceView implements Callback {
 
 
     public void update() {
-
+        _ship.update();
     }
 
 

@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 
 import com.mazerfaker.pewpewboom.R;
 import com.mazerfaker.pewpewboom.controller.Surface;
+import com.mazerfaker.pewpewboom.model.App;
 
 public class GameActivity extends Activity {
 
@@ -20,11 +22,32 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        initSurface();
+        init();
+    }
 
-        setListeners();
 
+    /**
+     * Have to init here because need game_layout size before initSurface
+     */
+    private void init() {
 
+        final LinearLayout gameLayout = (LinearLayout) findViewById(R.id.game_layout);
+        ViewTreeObserver vto = gameLayout.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener (new ViewTreeObserver.OnGlobalLayoutListener() {
+
+            @Override
+            public void onGlobalLayout() {
+                gameLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+                //Log.d(TAG, "SET SIZES W = " + width + "  H = " + height);
+                _app = App.getInstance();
+                _app.setWindowSize(gameLayout.getMeasuredWidth(), gameLayout.getMeasuredHeight());
+
+                setListeners();
+
+                initSurface();
+            }
+        });
     }
 
 
@@ -99,4 +122,5 @@ public class GameActivity extends Activity {
 
 
     Surface _surface;
+    App _app;
 }
