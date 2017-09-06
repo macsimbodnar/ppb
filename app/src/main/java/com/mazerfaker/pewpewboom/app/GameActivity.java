@@ -3,7 +3,6 @@ package com.mazerfaker.pewpewboom.app;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;

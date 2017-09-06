@@ -1,6 +1,7 @@
 package com.mazerfaker.pewpewboom.controller;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.util.Log;
@@ -31,7 +32,12 @@ public class Surface extends SurfaceView implements Callback {
         _app = App.getInstance();
 
         Weapon blaster = new Blaster(BitmapFactory.decodeResource(getResources(), R.drawable.bullet));
-        Weapon defaultMegaWeapon = new DefaulMegaWeapon(BitmapFactory.decodeResource(getResources(), R.drawable.laser));
+
+        // TODO da togliere il resize qui e creare delle immagini adatte
+        Bitmap laser = BitmapFactory.decodeResource(getResources(), R.drawable.laser);
+        Bitmap scaledLaser = Bitmap.createScaledBitmap(laser, laser.getWidth(), _app.getWindowHeght(), true);
+
+        Weapon defaultMegaWeapon = new DefaulMegaWeapon(scaledLaser);
 
         Ship ship = new Ship(BitmapFactory.decodeResource(getResources(), R.drawable.ship), blaster, defaultMegaWeapon);
 
