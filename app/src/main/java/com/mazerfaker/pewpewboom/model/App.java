@@ -2,10 +2,9 @@ package com.mazerfaker.pewpewboom.model;
 
 
 import android.graphics.Canvas;
-import android.util.Log;
 
 import com.mazerfaker.pewpewboom.model.characters.Ship;
-import com.mazerfaker.pewpewboom.model.weapons.Bullet;
+import com.mazerfaker.pewpewboom.model.characters.Bullet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +23,7 @@ public class App {
         _fire = false;
         _ship = null;
         _bullets = new ArrayList<Bullet>();
+        _enemyBullets = new ArrayList<Bullet>();
     }
 
 
@@ -143,6 +143,11 @@ public class App {
     }
 
 
+    public void addEnemyBullet(Bullet bullet) {
+        _enemyBullets.add(bullet);
+    }
+
+
     private int _windowWidth;
     private int _windowHeght;
 
@@ -152,4 +157,5 @@ public class App {
 
     private Ship _ship;
     private List<Bullet> _bullets;
+    private List<Bullet> _enemyBullets;
 }

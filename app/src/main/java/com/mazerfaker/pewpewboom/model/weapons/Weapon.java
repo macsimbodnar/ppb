@@ -1,7 +1,7 @@
 package com.mazerfaker.pewpewboom.model.weapons;
 
 
-import android.graphics.Canvas;
+import com.mazerfaker.pewpewboom.model.characters.Bullet;
 
 public interface Weapon {
 

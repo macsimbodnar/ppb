@@ -2,6 +2,7 @@ package com.mazerfaker.pewpewboom.model.weapons;
 
 import android.graphics.Bitmap;
 
+import com.mazerfaker.pewpewboom.model.characters.Bullet;
 import com.mazerfaker.pewpewboom.util.Constants;
 
 public class Blaster implements Weapon {

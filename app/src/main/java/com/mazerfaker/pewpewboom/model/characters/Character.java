@@ -1,11 +1,39 @@
 package com.mazerfaker.pewpewboom.model.characters;
 
+import android.graphics.Bitmap;
 
-import android.graphics.Canvas;
+import com.mazerfaker.pewpewboom.model.App;
+import com.mazerfaker.pewpewboom.model.Hitbox;
+import com.mazerfaker.pewpewboom.model.weapons.Weapon;
 
-public interface Character {
 
-    public void update();
-    public void draw(Canvas canvas);
+public class Character {
 
+    public Character(Bitmap bitmap, Weapon weapon, int life) {
+        _app = App.getInstance();
+        _bitmap = bitmap;
+        _life = life;
+        _halfWidth = _bitmap.getWidth() / 2.0f;
+        _halfHeight = _bitmap.getHeight() / 2.0f;
+        _weapon = weapon;
+    }
+
+
+    protected void initHitbox(float x, float y) {
+        _x = x;
+        _y = y;
+        _hitbox = new Hitbox(_x, _y, _bitmap.getWidth(), _bitmap.getHeight());
+    }
+
+
+    protected Bitmap _bitmap;
+    protected float _x;
+    protected float _y;
+    protected Hitbox _hitbox;
+    protected int _life;
+    protected Weapon _weapon;
+    protected App _app;
+
+    protected float _halfWidth;
+    protected float _halfHeight;
 }

@@ -14,7 +14,6 @@ import com.mazerfaker.pewpewboom.model.characters.Ship;
 import com.mazerfaker.pewpewboom.model.weapons.Blaster;
 import com.mazerfaker.pewpewboom.model.weapons.Weapon;
 
-import java.util.List;
 
 public class Surface extends SurfaceView implements Callback {
 
@@ -61,7 +60,7 @@ public class Surface extends SurfaceView implements Callback {
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-
+        // TODO da implementare
     }
 
 
