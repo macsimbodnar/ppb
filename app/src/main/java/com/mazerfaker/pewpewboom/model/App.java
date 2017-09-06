@@ -2,11 +2,11 @@ package com.mazerfaker.pewpewboom.model;
 
 
 import android.graphics.Canvas;
+import android.graphics.RectF;
 
 import com.mazerfaker.pewpewboom.model.characters.Bullet;
 import com.mazerfaker.pewpewboom.model.characters.Drawable;
 import com.mazerfaker.pewpewboom.model.characters.Ship;
-import com.mazerfaker.pewpewboom.util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +41,7 @@ public class App {
 
     public void update() {
 
-        checkCollision();
+        checkCollisions();
 
         _ship.update();
 
@@ -179,7 +179,14 @@ public class App {
     }
 
 
-    private void checkCollision() {
+    private void checkCollisions() {
+        enemyBulletsCollisons();
+        shipBulletsCollisions();
+        shipEnemiesCollisions();
+    }
+
+
+    private void enemyBulletsCollisons() {
         for(int i = 0; i < _bullets.size(); i++) {
             for(int j = 0; j < _enemies.size(); j++) {
 
@@ -188,7 +195,30 @@ public class App {
                     i--;
                     _enemies.remove(j);
                     j--;
+                    // TODO da fare i danni
                 }
+            }
+        }
+    }
+
+
+    private void shipBulletsCollisions() {
+        for(int i = 0; i < _enemyBullets.size(); i++) {
+            if(_ship.getHitbox().intersect(_enemyBullets.get(i).getHitbox())) {
+                _enemyBullets.remove(i);
+                i--;
+                // TODO da fare i danni
+            }
+        }
+    }
+
+
+    private void shipEnemiesCollisions() {
+        for(int i = 0; i < _enemies.size(); i++) {
+            if(_ship.getHitbox().intersect(_enemies.get(i).getHitbox())) {
+                _enemies.remove(i);
+                i--;
+                // TODO da fare i danni
             }
         }
     }
