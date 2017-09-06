@@ -12,7 +12,8 @@
 
         <!-- Main Menu -->
         <activity
-            android:name=".app.MainMenuActivity">
+            android:name=".app.MainMenuActivity"
+            android:screenOrientation="portrait" >
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +24,9 @@
         </activity>
 
         <!-- Game -->
-        <activity android:name=".app.GameActivity" />
+        <activity
+            android:name=".app.GameActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

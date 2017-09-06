@@ -9,7 +9,12 @@ import android.view.SurfaceView;
 import android.view.SurfaceHolder.Callback;
 
 import com.mazerfaker.pewpewboom.R;
+import com.mazerfaker.pewpewboom.model.App;
 import com.mazerfaker.pewpewboom.model.characters.Ship;
+import com.mazerfaker.pewpewboom.model.weapons.Blaster;
+import com.mazerfaker.pewpewboom.model.weapons.Weapon;
+
+import java.util.List;
 
 public class Surface extends SurfaceView implements Callback {
 
@@ -21,7 +26,12 @@ public class Surface extends SurfaceView implements Callback {
         getHolder().addCallback(this); // Important
         _mainThread = new MainThread(this);
 
-        _ship = new Ship(BitmapFactory.decodeResource(getResources(), R.drawable.ship));
+        _app = App.getInstance();
+
+        Weapon blaster = new Blaster(BitmapFactory.decodeResource(getResources(), R.drawable.bullet));
+        Ship ship = new Ship(BitmapFactory.decodeResource(getResources(), R.drawable.ship), blaster);
+
+        _app.setShip(ship);
     }
 
 
@@ -56,17 +66,18 @@ public class Surface extends SurfaceView implements Callback {
 
 
     public void update() {
-        _ship.update();
+        _app.update();
     }
 
 
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-        _ship.draw(canvas);
+        _app.draw(canvas);
     }
 
 
+
     private MainThread _mainThread;
-    private Ship _ship;
+    private App _app;
 }

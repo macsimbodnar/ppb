@@ -8,6 +8,4 @@ public interface Character {
     public void update();
     public void draw(Canvas canvas);
 
-    public int getLife();
-    public int takeDamage(int damage);
 }

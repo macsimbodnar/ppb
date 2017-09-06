@@ -74,12 +74,12 @@ public class GameActivity extends Activity {
             public boolean onTouch(View view, MotionEvent motionEvent) {
 
                 if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    Log.d(TAG, "LEFT DOWN");
+                    //Log.d(TAG, "LEFT DOWN");
                     _app.moveLeft(true);
                 }
 
                 if(motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    Log.d(TAG, "LEFT UP");
+                    //Log.d(TAG, "LEFT UP");
                     _app.moveLeft(false);
                 }
 
@@ -88,18 +88,18 @@ public class GameActivity extends Activity {
         });
 
 
-        // TODO center listener
         center.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
 
                 if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    Log.d(TAG, "CENTER DOWN");
+                    //Log.d(TAG, "CENTER DOWN");
+                    _app.fire(true);
                 }
 
-                if(motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    Log.d(TAG, "CENTER UP");
-                }
+                //if(motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    //Log.d(TAG, "CENTER UP");
+                //}
 
                 return true;
             }
@@ -111,12 +111,12 @@ public class GameActivity extends Activity {
             public boolean onTouch(View view, MotionEvent motionEvent) {
 
                 if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    Log.d(TAG, "RIGHT DOWN");
+                    //Log.d(TAG, "RIGHT DOWN");
                     _app.moveRight(true);
                 }
 
                 if(motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    Log.d(TAG, "RIGHT UP");
+                    //Log.d(TAG, "RIGHT UP");
                     _app.moveRight(false);
                 }
 
