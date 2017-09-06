@@ -1,15 +1,16 @@
 package com.mazerfaker.pewpewboom.model.weapons;
 
+
 import android.graphics.Bitmap;
 
 import com.mazerfaker.pewpewboom.model.characters.Bullet;
 import com.mazerfaker.pewpewboom.util.Constants;
 
-public class Blaster extends BaseWeapon implements Weapon {
+public class EnemyBlaster extends BaseWeapon implements Weapon {
 
 
-    public Blaster(Bitmap bitmap) {
-        super(bitmap, Constants.BLASTER_FIRE_RATE, Constants.BLASTER_BULLET_SPEED);
+    public EnemyBlaster(Bitmap bitmap) {
+        super(bitmap, Constants.ENEMY_BLASTER_FIRE_RATE, Constants.ENEMY_BLASTER_BULLET_SPEED);
     }
 
 

@@ -11,4 +11,7 @@ public class Constants {
     public final static int BLASTER_FIRE_RATE = 20;
     public final static int BLASTER_BULLET_SPEED = 30;
 
+    public final static int ENEMY_BLASTER_FIRE_RATE = 10;
+    public final static int ENEMY_BLASTER_BULLET_SPEED = -30;
+
 }
