@@ -9,7 +9,7 @@ public class BaseWeapon {
         _bulletBitmap = bitmap;
         _fireRate = fireRate;
         _bulletSpeed = bulletSpeed;
-        _fireCount = 0;
+        _fireCount = -1;
         _damage = damage;
     }
 

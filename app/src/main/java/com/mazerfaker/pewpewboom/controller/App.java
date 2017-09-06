@@ -81,28 +81,30 @@ public class App {
     public void draw(Canvas canvas) {
         _ship.draw(canvas);
 
-        drawDebug(canvas, _ship.getHitbox());
+        //drawDebug(canvas, _ship.getHitbox());
 
         for(Bullet b : _megaBullets) {
             b.draw(canvas);
+
+            //drawDebug(canvas, b.getHitbox());
         }
 
         for(Drawable d : _enemies) {
             d.draw(canvas);
 
-            drawDebug(canvas, d.getHitbox());
+            //drawDebug(canvas, d.getHitbox());
         }
 
         for(Bullet b : _bullets) {
             b.draw(canvas);
 
-            drawDebug(canvas, b.getHitbox());
+            //drawDebug(canvas, b.getHitbox());
         }
 
         for(Bullet eb : _enemyBullets) {
             eb.draw(canvas);
 
-            drawDebug(canvas, eb.getHitbox());
+            //drawDebug(canvas, eb.getHitbox());
         }
     }
 
@@ -139,7 +141,9 @@ public class App {
 
 
     public void fire() {
-        _fire = true;
+        if( _megaWeaponCounter == _megaWeaponReset) {
+            _fire = true;
+        }
     }
 
 
