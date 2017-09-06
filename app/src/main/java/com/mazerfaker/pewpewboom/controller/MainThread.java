@@ -16,6 +16,7 @@ public class MainThread extends Thread {
         _surface = surface;
         _surfaceHolder = surface.getHolder();
         _isRunning = true;
+        _pause = false;
         _realFPS = 0;
     }
 
@@ -32,37 +33,38 @@ public class MainThread extends Thread {
         App app = App.getInstance();
 
 
-        // TODO da fare la condizione di arreto o di pausa
         while(_isRunning) {
 
             canvas = null;
             startTime = System.currentTimeMillis();
 
             // main game actions update and draw
-            try {
+            if(!_pause) {
+                try {
 
-                canvas = _surfaceHolder.lockCanvas();
-                synchronized( _surfaceHolder ) {
-                    synchronized (App.getInstance()) {
-                        _surface.update();
-                        _surface.draw(canvas);
+                    canvas = _surfaceHolder.lockCanvas();
+                    synchronized (_surfaceHolder) {
+                        synchronized (App.getInstance()) {
+                            _surface.update();
+                            _surface.draw(canvas);
 
-                        if(app.isGameOver()) {
-                            return;
+                            if (app.isGameOver()) {
+                                return;
+                            }
                         }
+
                     }
 
-                }
+                } catch (Exception e) {
 
-            } catch (Exception e) {
+                    Log.e(TAG, "Error canvas");
+                    e.printStackTrace();
 
-                Log.e(TAG, "Error canvas");
-                e.printStackTrace();
+                } finally {
 
-            } finally {
-
-                if(canvas!=null){
-                    _surfaceHolder.unlockCanvasAndPost(canvas);
+                    if (canvas != null) {
+                        _surfaceHolder.unlockCanvasAndPost(canvas);
+                    }
                 }
             }
 
@@ -98,8 +100,19 @@ public class MainThread extends Thread {
     }
 
 
+    public void setRunning(boolean running) {
+        _isRunning = running;
+    }
+
+
+    public void pause(boolean pause) {
+        _pause = pause;
+    }
+
+
     final private SurfaceHolder _surfaceHolder;
     private Surface _surface;
+    private boolean _pause;
     private boolean _isRunning;
-    long _realFPS;
+    private long _realFPS;
 }

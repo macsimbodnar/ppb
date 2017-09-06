@@ -85,6 +85,11 @@ public class Surface extends SurfaceView implements Callback {
     }
 
 
+    public void pause(boolean pause) {
+        _mainThread.pause(pause);
+    }
+
+
     private void addEnemy() {
         Weapon enemyBlaster = new EnemyBlaster(BitmapFactory.decodeResource(getResources(), R.drawable.bullet2));
         Enemy enemy = new Enemy(BitmapFactory.decodeResource(getResources(), R.drawable.enemy), enemyBlaster, Constants.SIMPLE_ENEMY_LIFE);

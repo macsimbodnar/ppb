@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.widget.LinearLayout;
+import android.view.WindowManager;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 import com.mazerfaker.pewpewboom.R;
 import com.mazerfaker.pewpewboom.controller.Surface;
@@ -27,6 +29,39 @@ public class GameActivity extends Activity {
 
         init();
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        hideNavbar();
+    }
+
+
+    private void hideNavbar() {
+        _gameLayout.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+    }
+
+
+    /*@Override
+    public void onBackPressed() {
+        pausaButton.setVisibility(View.GONE);
+        PauseMenu.setVisibility(View.VISIBLE);
+        game_panel.Pause_game=true;
+    }
+
+    @Override
+    protected void onStop() {
+        if (MainMusic.isPlaying())
+            MainMusic.stop();
+        super.onStop();
+    }*/
 
 
     /**
@@ -59,14 +94,19 @@ public class GameActivity extends Activity {
 
         _surface = new Surface(getApplicationContext());
         _gameLayout.addView(_surface);
+
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
 
     private void setListeners() {
 
-        LinearLayout left = (LinearLayout) findViewById(R.id.game_left);
-        LinearLayout center = (LinearLayout) findViewById(R.id.game_center);
-        LinearLayout right = (LinearLayout) findViewById(R.id.game_right);
+        RelativeLayout left = (RelativeLayout) findViewById(R.id.game_left);
+        RelativeLayout center = (RelativeLayout) findViewById(R.id.game_center);
+        RelativeLayout right = (RelativeLayout) findViewById(R.id.game_right);
+
+        _pauseButton = (ImageButton) findViewById(R.id.pause_button);
 
 
         left.setOnTouchListener(new View.OnTouchListener() {
@@ -123,10 +163,21 @@ public class GameActivity extends Activity {
                 return true;
             }
         });
+
+
+        _pauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                _pauseButton.setVisibility(View.GONE);
+                //PauseMenu.setVisibility(View.VISIBLE);
+                _surface.pause(true);
+            }
+        });
     }
 
 
     private ConstraintLayout _gameLayout;
+    private ImageButton _pauseButton;
     private Surface _surface;
     private App _app;
 }

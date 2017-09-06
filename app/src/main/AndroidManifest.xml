@@ -13,7 +13,10 @@
         <!-- Main Menu -->
         <activity
             android:name=".app.MainMenuActivity"
-            android:screenOrientation="portrait" >
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait">
+            <!--android:theme="@style/FullscreenTheme" -->
+
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +29,10 @@
         <!-- Game -->
         <activity
             android:name=".app.GameActivity"
-            android:screenOrientation="portrait"/>
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+            <!--android:theme="@style/FullscreenTheme" -->
+
     </application>
 
 </manifest>
