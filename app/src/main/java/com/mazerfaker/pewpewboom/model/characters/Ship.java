@@ -12,7 +12,7 @@ public class Ship extends Character implements Drawable {
 
 
     public Ship(Bitmap bitmap, Weapon weapon) {
-        super(bitmap, weapon, Constants.SHIP_LIFE);
+        super(bitmap, weapon, Constants.SHIP_LIFE, Constants.SHIP_X_SPEED);
 
         float initialX = (((float) _app.getWindowWidth()) / 2.0f) - (_bitmap.getWidth() / 2.0f);
         float initialY = ((float) _app.getWindowHeght()) - _bitmap.getHeight() - Constants.SHIP_BOTTOM_PADDING;
@@ -57,7 +57,7 @@ public class Ship extends Character implements Drawable {
 
     private void moveRight() {
         if((_x + _bitmap.getWidth()) < _app.getWindowWidth()) {
-            _x += Constants.SHIP_X_SPEED;
+            _x += _speed;
             _hitbox.updateX(_x);
         }
     }
@@ -65,7 +65,7 @@ public class Ship extends Character implements Drawable {
 
     private void moveLeft() {
         if(_x  > 0) {
-            _x -= Constants.SHIP_X_SPEED;
+            _x -= _speed;
             _hitbox.updateX(_x);
         }
     }

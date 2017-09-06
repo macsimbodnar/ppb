@@ -3,8 +3,10 @@ package com.mazerfaker.pewpewboom.model;
 
 import android.graphics.Canvas;
 
-import com.mazerfaker.pewpewboom.model.characters.Ship;
 import com.mazerfaker.pewpewboom.model.characters.Bullet;
+import com.mazerfaker.pewpewboom.model.characters.Drawable;
+import com.mazerfaker.pewpewboom.model.characters.Ship;
+import com.mazerfaker.pewpewboom.util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,7 @@ public class App {
         _ship = null;
         _bullets = new ArrayList<Bullet>();
         _enemyBullets = new ArrayList<Bullet>();
+        _enemies = new ArrayList<Drawable>();
     }
 
 
@@ -40,6 +43,10 @@ public class App {
 
         _ship.update();
 
+        for(Drawable d : _enemies) {
+            d.update();
+        }
+
         for(int i = 0; i < _bullets.size(); i++) {
 
             if(!_bullets.get(i).update()) {
@@ -50,14 +57,31 @@ public class App {
 
         }
 
+        for (int i = 0; i < _enemyBullets.size(); i++) {
+
+            if(!_enemyBullets.get(i).update()) {
+                _enemyBullets.remove(i);
+                i--;
+            }
+        }
+
         //Log.d(TAG, "size: " + _bullets.size());
     }
 
 
     public void draw(Canvas canvas) {
         _ship.draw(canvas);
+
+        for(Drawable d : _enemies) {
+            d.draw(canvas);
+        }
+
         for(Bullet b : _bullets) {
             b.draw(canvas);
+        }
+
+        for(Bullet eb : _enemyBullets) {
+            eb.draw(canvas);
         }
     }
 
@@ -148,6 +172,11 @@ public class App {
     }
 
 
+    public void addEnemy(Drawable drawable) {
+        _enemies.add(drawable);
+    }
+
+
     private int _windowWidth;
     private int _windowHeght;
 
@@ -156,6 +185,8 @@ public class App {
     private boolean _fire;
 
     private Ship _ship;
+    private List<Drawable> _enemies;
     private List<Bullet> _bullets;
     private List<Bullet> _enemyBullets;
+
 }

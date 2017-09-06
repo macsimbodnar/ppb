@@ -6,13 +6,17 @@ import android.graphics.Canvas;
 public class Bullet extends Character {
 
     public Bullet(Bitmap bitmap, float x, float y, int speed) {
-        super(bitmap, null, 0);
+        super(bitmap, null, 0, speed);
 
         float initialX = x - (bitmap.getWidth() / 2.0f);
-        float initialY = y - bitmap.getHeight();
+        float initialY;
+        if(speed > 0) {
+            initialY = y - bitmap.getHeight();
+        } else {
+            initialY = y;
+        }
         initHitbox(initialX, initialY);
 
-        _speed = speed;
         _dangerous = true;
     }
 
@@ -43,7 +47,6 @@ public class Bullet extends Character {
     }
 
 
-    private int _speed;
     private int _damage;
     private boolean _dangerous;
 }

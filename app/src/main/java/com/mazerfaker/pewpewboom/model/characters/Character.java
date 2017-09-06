@@ -9,13 +9,14 @@ import com.mazerfaker.pewpewboom.model.weapons.Weapon;
 
 public class Character {
 
-    public Character(Bitmap bitmap, Weapon weapon, int life) {
+    public Character(Bitmap bitmap, Weapon weapon, int life, int speed) {
         _app = App.getInstance();
         _bitmap = bitmap;
         _life = life;
         _halfWidth = _bitmap.getWidth() / 2.0f;
         _halfHeight = _bitmap.getHeight() / 2.0f;
         _weapon = weapon;
+        _speed = speed;
     }
 
 
@@ -33,6 +34,7 @@ public class Character {
     protected int _life;
     protected Weapon _weapon;
     protected App _app;
+    protected int _speed;
 
     protected float _halfWidth;
     protected float _halfHeight;
