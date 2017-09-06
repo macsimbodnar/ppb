@@ -1,4 +1,4 @@
-package com.mazerfaker.pewpewboom.model;
+package com.mazerfaker.pewpewboom.controller;
 
 
 import android.graphics.Canvas;
@@ -10,6 +10,7 @@ import android.util.Log;
 import com.mazerfaker.pewpewboom.model.characters.Bullet;
 import com.mazerfaker.pewpewboom.model.characters.Drawable;
 import com.mazerfaker.pewpewboom.model.characters.Ship;
+import com.mazerfaker.pewpewboom.util.Constants;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,9 +30,12 @@ public class App {
         _fire = false;
         _ship = null;
         _bullets = new ArrayList<Bullet>();
+        _megaBullets = new ArrayList<Bullet>();
         _enemyBullets = new ArrayList<Bullet>();
         _enemies = new ArrayList<Drawable>();
         _gameover = false;
+        _megaWeaponCounter = Constants.MEGA_W_RESET;
+        _megaWeaponReset = Constants.MEGA_W_RESET;
     }
 
 
@@ -49,6 +53,12 @@ public class App {
         checkCollisions();
 
         _ship.update();
+
+        superWeaponFire();
+
+        for(Bullet b : _megaBullets) {
+            b.update();
+        }
 
         for(Drawable d : _enemies) {
             d.update();
@@ -71,35 +81,29 @@ public class App {
     public void draw(Canvas canvas) {
         _ship.draw(canvas);
 
-        //drawDebug(canvas, _ship.getHitbox());
+        drawDebug(canvas, _ship.getHitbox());
+
+        for(Bullet b : _megaBullets) {
+            b.draw(canvas);
+        }
 
         for(Drawable d : _enemies) {
             d.draw(canvas);
 
-            //drawDebug(canvas, d.getHitbox());
+            drawDebug(canvas, d.getHitbox());
         }
 
         for(Bullet b : _bullets) {
             b.draw(canvas);
 
-            //drawDebug(canvas, b.getHitbox());
+            drawDebug(canvas, b.getHitbox());
         }
 
         for(Bullet eb : _enemyBullets) {
             eb.draw(canvas);
 
-            //drawDebug(canvas, eb.getHitbox());
+            drawDebug(canvas, eb.getHitbox());
         }
-    }
-
-
-    public void setWindowWidth(int width) {
-        _windowWidth = width;
-    }
-
-
-    public void setWindowHeght(int height) {
-        _windowHeght = height;
     }
 
 
@@ -134,18 +138,8 @@ public class App {
     }
 
 
-    public boolean isFire() {
-        if(_fire) {
-            _fire = false;
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-
-    public void fire(boolean fire) {
-        _fire = fire;
+    public void fire() {
+        _fire = true;
     }
 
 
@@ -159,18 +153,8 @@ public class App {
     }
 
 
-    public void deletBullet(int index) {
-        _bullets.remove(index);
-    }
-
-
     public void setShip(Ship ship) {
         _ship = ship;
-    }
-
-
-    public Ship getShip() {
-        return _ship;
     }
 
 
@@ -184,10 +168,44 @@ public class App {
     }
 
 
+    public boolean isGameOver() {
+        return _gameover;
+    }
+
+
+    public void addMegaBullet(Bullet megaBullet) {
+        _megaBullets.add(megaBullet);
+    }
+
     private void checkCollisions() {
+        megaBulletsCollision();
         enemyBulletsCollisons();
         shipBulletsCollisions();
         shipEnemiesCollisions();
+    }
+
+
+    private void megaBulletsCollision() {
+        for (Iterator<Bullet> iteratorB = _megaBullets.iterator(); iteratorB.hasNext(); ) {
+            Bullet b = iteratorB.next();
+
+            // check if megabulllet time is end
+            if(b.getLifetime() == 0) {
+                iteratorB.remove();
+                continue;
+            }
+
+            for (Iterator<Drawable> iteratorE = _enemies.iterator(); iteratorE.hasNext(); ) {
+                Drawable d = iteratorE.next();
+
+                // check collision
+                if(RectF.intersects(b.getHitbox(), d.getHitbox())) {
+                    if(d.hit(b.getDamage())) {
+                        iteratorE.remove();
+                    }
+                }
+            }
+        }
     }
 
 
@@ -237,7 +255,6 @@ public class App {
                 if(_ship.hit(b.getDamage())) {
                     _gameover = true;
                 }
-                Log.d(TAG, "HIT");
                 iterator.remove();
             }
         }
@@ -257,15 +274,25 @@ public class App {
     }
 
 
-    public boolean isGameOver() {
-        return _gameover;
-    }
-
-
-    public void drawDebug(Canvas c, RectF hitbox) {
+    private void drawDebug(Canvas c, RectF hitbox) {
         Paint paint = new Paint();
         paint.setColor(Color.BLUE);
         c.drawRect(hitbox, paint);
+    }
+
+
+    private void superWeaponFire() {
+        if(_fire && _megaWeaponCounter == _megaWeaponReset) {
+
+            _ship.megafire();
+
+            _fire = false;
+            _megaWeaponCounter = 0;
+        }
+
+        if(_megaWeaponCounter < _megaWeaponReset) {
+            _megaWeaponCounter++;
+        }
     }
 
 
@@ -279,7 +306,10 @@ public class App {
     private Ship _ship;
     private List<Drawable> _enemies;
     private List<Bullet> _bullets;
+    private List<Bullet> _megaBullets;
     private List<Bullet> _enemyBullets;
     private boolean _gameover;
 
+    private int _megaWeaponCounter;
+    private int _megaWeaponReset;
 }

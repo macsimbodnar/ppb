@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 
 import com.mazerfaker.pewpewboom.R;
 import com.mazerfaker.pewpewboom.controller.Surface;
-import com.mazerfaker.pewpewboom.model.App;
+import com.mazerfaker.pewpewboom.controller.App;
 
 public class GameActivity extends Activity {
 
@@ -43,7 +43,7 @@ public class GameActivity extends Activity {
 
                 //Log.d(TAG, "SET SIZES W = " + width + "  H = " + height);
                 _app = App.getInstance();
-                Log.d(TAG, _app.toString());
+
                 _app.setWindowSize(_gameLayout.getMeasuredWidth(), _gameLayout.getMeasuredHeight());
 
                 initSurface();
@@ -94,7 +94,7 @@ public class GameActivity extends Activity {
 
                 if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     //Log.d(TAG, "CENTER DOWN");
-                    _app.fire(true);
+                    _app.fire();
                 }
 
                 //if(motionEvent.getAction() == MotionEvent.ACTION_UP) {

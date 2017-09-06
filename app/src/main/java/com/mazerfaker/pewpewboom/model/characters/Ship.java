@@ -11,13 +11,15 @@ public class Ship extends Character implements Drawable {
     private static final String TAG = "Ship";
 
 
-    public Ship(Bitmap bitmap, Weapon weapon) {
+    public Ship(Bitmap bitmap, Weapon weapon, Weapon megaWeapon) {
         super(bitmap, weapon, Constants.SHIP_LIFE, Constants.SHIP_X_SPEED);
 
         float initialX = (((float) _app.getWindowWidth()) / 2.0f) - (_bitmap.getWidth() / 2.0f);
         float initialY = ((float) _app.getWindowHeght()) - _bitmap.getHeight() - Constants.SHIP_BOTTOM_PADDING;
 
         initHitbox(initialX, initialY);
+
+        _megaWeapon = megaWeapon;
     }
 
 
@@ -31,6 +33,11 @@ public class Ship extends Character implements Drawable {
     @Override
     public void draw(Canvas canvas) {
         canvas.drawBitmap(_bitmap, _x, _y, null);
+    }
+
+
+    public void megafire() {
+        _app.addMegaBullet(_megaWeapon.fire(_x + _halfWidth, _y));
     }
 
 
@@ -67,4 +74,7 @@ public class Ship extends Character implements Drawable {
             _app.addBullet(bullet);
         }
     }
+
+
+    private Weapon _megaWeapon;
 }

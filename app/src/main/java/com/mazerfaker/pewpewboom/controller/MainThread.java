@@ -4,7 +4,6 @@ import android.graphics.Canvas;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
-import com.mazerfaker.pewpewboom.model.App;
 import com.mazerfaker.pewpewboom.util.Constants;
 
 public class MainThread extends Thread {

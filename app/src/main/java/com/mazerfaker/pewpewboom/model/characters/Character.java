@@ -3,7 +3,7 @@ package com.mazerfaker.pewpewboom.model.characters;
 import android.graphics.Bitmap;
 import android.graphics.RectF;
 
-import com.mazerfaker.pewpewboom.model.App;
+import com.mazerfaker.pewpewboom.controller.App;
 import com.mazerfaker.pewpewboom.model.Hitbox;
 import com.mazerfaker.pewpewboom.model.weapons.Weapon;
 

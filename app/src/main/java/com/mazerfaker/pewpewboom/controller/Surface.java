@@ -9,10 +9,10 @@ import android.view.SurfaceView;
 import android.view.SurfaceHolder.Callback;
 
 import com.mazerfaker.pewpewboom.R;
-import com.mazerfaker.pewpewboom.model.App;
 import com.mazerfaker.pewpewboom.model.characters.Enemy;
 import com.mazerfaker.pewpewboom.model.characters.Ship;
 import com.mazerfaker.pewpewboom.model.weapons.Blaster;
+import com.mazerfaker.pewpewboom.model.weapons.DefaulMegaWeapon;
 import com.mazerfaker.pewpewboom.model.weapons.EnemyBlaster;
 import com.mazerfaker.pewpewboom.model.weapons.Weapon;
 import com.mazerfaker.pewpewboom.util.Constants;
@@ -31,7 +31,9 @@ public class Surface extends SurfaceView implements Callback {
         _app = App.getInstance();
 
         Weapon blaster = new Blaster(BitmapFactory.decodeResource(getResources(), R.drawable.bullet));
-        Ship ship = new Ship(BitmapFactory.decodeResource(getResources(), R.drawable.ship), blaster);
+        Weapon defaultMegaWeapon = new DefaulMegaWeapon(BitmapFactory.decodeResource(getResources(), R.drawable.laser));
+
+        Ship ship = new Ship(BitmapFactory.decodeResource(getResources(), R.drawable.ship), blaster, defaultMegaWeapon);
 
         _app.setShip(ship);
 
