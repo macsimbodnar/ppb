@@ -33,6 +33,12 @@ public class Character {
     }
 
 
+    public boolean hit(int damage) {
+        _life -= damage;
+
+        return _life <= 0;
+    }
+
     protected Bitmap _bitmap;
     protected float _x;
     protected float _y;

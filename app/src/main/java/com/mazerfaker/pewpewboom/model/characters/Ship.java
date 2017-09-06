@@ -34,17 +34,6 @@ public class Ship extends Character implements Drawable {
     }
 
 
-    public int getLife() {
-        return _life;
-    }
-
-
-    public int takeDamage(int damage) {
-        _life -= damage;
-        return (_life < 0) ? 0 : _life;
-    }
-
-
     private void moveOnX() {
         //Log.d(TAG, "MOVE LEFT = " + _app.isMovingLeft() + "  MOVE RIGHT = " + _app.isMovingRight());
         if(_app.isMovingRight()) {

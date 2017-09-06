@@ -10,7 +10,8 @@ public class EnemyBlaster extends BaseWeapon implements Weapon {
 
 
     public EnemyBlaster(Bitmap bitmap) {
-        super(bitmap, Constants.ENEMY_BLASTER_FIRE_RATE, Constants.ENEMY_BLASTER_BULLET_SPEED);
+        super(bitmap, Constants.ENEMY_BLASTER_FIRE_RATE,
+                Constants.ENEMY_BLASTER_BULLET_SPEED, Constants.ENEMY_BLASTER_DAMAGE);
     }
 
 
@@ -22,6 +23,6 @@ public class EnemyBlaster extends BaseWeapon implements Weapon {
             return null;
         }
 
-        return new Bullet(_bulletBitmap, x, y, _bulletSpeed);
+        return new Bullet(_bulletBitmap, x, y, _bulletSpeed, _damage);
     }
 }

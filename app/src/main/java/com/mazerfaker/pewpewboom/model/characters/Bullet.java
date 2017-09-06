@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 
 public class Bullet extends Character {
 
-    public Bullet(Bitmap bitmap, float x, float y, int speed) {
+    public Bullet(Bitmap bitmap, float x, float y, int speed, int damage) {
         super(bitmap, null, 0, speed);
 
         float initialX = x - (bitmap.getWidth() / 2.0f);
@@ -17,19 +17,13 @@ public class Bullet extends Character {
         }
         initHitbox(initialX, initialY);
 
-        _dangerous = true;
+        _damage = damage;
     }
 
 
-    public boolean update() {
+    public void update() {
         _y -= _speed;
         _hitbox.updateY(_y);
-
-        if((_y + _bitmap.getHeight()) < 0 || _y > _app.getWindowHeght()) {
-            _dangerous = false;
-        }
-
-        return _dangerous;
     }
 
 
@@ -38,16 +32,10 @@ public class Bullet extends Character {
     }
 
 
-    public boolean isValid() {
-        return _dangerous;
-    }
-
-
-    public boolean isNotValid() {
-        return !_dangerous;
+    public int getDamage() {
+        return _damage;
     }
 
 
     private int _damage;
-    private boolean _dangerous;
 }

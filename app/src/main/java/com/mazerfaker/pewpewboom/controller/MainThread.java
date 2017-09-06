@@ -30,6 +30,7 @@ public class MainThread extends Thread {
         long startTime = 0;
         long timeThisFrame = 0;
         long sleepTime = 0;
+        App app = App.getInstance();
 
 
         // TODO da fare la condizione di arreto o di pausa
@@ -46,6 +47,10 @@ public class MainThread extends Thread {
                     synchronized (App.getInstance()) {
                         _surface.update();
                         _surface.draw(canvas);
+
+                        if(app.isGameOver()) {
+                            return;
+                        }
                     }
 
                 }

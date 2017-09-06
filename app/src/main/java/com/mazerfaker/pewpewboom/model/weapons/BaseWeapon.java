@@ -5,11 +5,12 @@ import android.graphics.Bitmap;
 
 public class BaseWeapon {
 
-    public BaseWeapon(Bitmap bitmap, int fireRate, int bulletSpeed) {
+    public BaseWeapon(Bitmap bitmap, int fireRate, int bulletSpeed, int damage) {
         _bulletBitmap = bitmap;
         _fireRate = fireRate;
         _bulletSpeed = bulletSpeed;
         _fireCount = 0;
+        _damage = damage;
     }
 
 
@@ -26,4 +27,5 @@ public class BaseWeapon {
     protected int _fireRate;
     protected int _bulletSpeed;
     protected int _fireCount;
+    protected int _damage;
 }
