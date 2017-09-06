@@ -41,6 +41,8 @@ public class App {
 
     public void update() {
 
+        checkCollision();
+
         _ship.update();
 
         for(Drawable d : _enemies) {
@@ -174,6 +176,21 @@ public class App {
 
     public void addEnemy(Drawable drawable) {
         _enemies.add(drawable);
+    }
+
+
+    private void checkCollision() {
+        for(int i = 0; i < _bullets.size(); i++) {
+            for(int j = 0; j < _enemies.size(); j++) {
+
+                if(_bullets.get(i).getHitbox().intersect(_enemies.get(j).getHitbox())) {
+                    _bullets.remove(i);
+                    i--;
+                    _enemies.remove(j);
+                    j--;
+                }
+            }
+        }
     }
 
 

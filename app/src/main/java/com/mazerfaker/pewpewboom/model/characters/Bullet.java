@@ -23,6 +23,7 @@ public class Bullet extends Character {
 
     public boolean update() {
         _y -= _speed;
+        _hitbox.updateY(_y);
 
         if((_y + _bitmap.getHeight()) < 0 || _y > _app.getWindowHeght()) {
             _dangerous = false;

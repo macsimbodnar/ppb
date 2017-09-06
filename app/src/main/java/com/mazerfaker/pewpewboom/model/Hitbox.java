@@ -31,6 +31,12 @@ public class Hitbox {
         return _hitbox.intersect(hitbox);
     }
 
+
+    public RectF getRect() {
+        return _hitbox;
+    }
+
+
     private RectF _hitbox;
     private float _width;
     private float _height;

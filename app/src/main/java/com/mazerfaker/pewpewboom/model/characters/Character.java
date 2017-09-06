@@ -1,6 +1,7 @@
 package com.mazerfaker.pewpewboom.model.characters;
 
 import android.graphics.Bitmap;
+import android.graphics.RectF;
 
 import com.mazerfaker.pewpewboom.model.App;
 import com.mazerfaker.pewpewboom.model.Hitbox;
@@ -24,6 +25,11 @@ public class Character {
         _x = x;
         _y = y;
         _hitbox = new Hitbox(_x, _y, _bitmap.getWidth(), _bitmap.getHeight());
+    }
+
+
+    public RectF getHitbox() {
+        return _hitbox.getRect();
     }
 
 

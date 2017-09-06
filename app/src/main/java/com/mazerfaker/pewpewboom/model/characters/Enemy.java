@@ -27,6 +27,7 @@ public class Enemy extends Character implements Drawable {
     @Override
     public void update() {
         _y += _speed;
+        _hitbox.updateY(_y);
         fire();
     }
 
