@@ -83,16 +83,16 @@ public class App {
 
         //drawDebug(canvas, _ship.getHitbox());
 
-        for(Bullet b : _megaBullets) {
-            b.draw(canvas);
-
-            //drawDebug(canvas, b.getHitbox());
-        }
-
         for(Drawable d : _enemies) {
             d.draw(canvas);
 
             //drawDebug(canvas, d.getHitbox());
+        }
+
+        for(Bullet eb : _enemyBullets) {
+            eb.draw(canvas);
+
+            //drawDebug(canvas, eb.getHitbox());
         }
 
         for(Bullet b : _bullets) {
@@ -101,10 +101,10 @@ public class App {
             //drawDebug(canvas, b.getHitbox());
         }
 
-        for(Bullet eb : _enemyBullets) {
-            eb.draw(canvas);
+        for(Bullet b : _megaBullets) {
+            b.draw(canvas);
 
-            //drawDebug(canvas, eb.getHitbox());
+            //drawDebug(canvas, b.getHitbox());
         }
     }
 

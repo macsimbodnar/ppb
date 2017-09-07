@@ -7,7 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.mazerfaker.pewpewboom.R;
@@ -96,7 +96,7 @@ public class GameActivity extends Activity {
         ConstraintLayout center = (ConstraintLayout) findViewById(R.id.bottom_bar);
         LinearLayout right = (LinearLayout) findViewById(R.id.game_right);
 
-        //_pauseButton = (ImageButton) findViewById(R.id.pause_button);
+        _pauseButton = (Button) findViewById(R.id.pause_button);
 
 
         left.setOnTouchListener(new View.OnTouchListener() {
@@ -155,14 +155,14 @@ public class GameActivity extends Activity {
         });
 
 
-        /*_pauseButton.setOnClickListener(new View.OnClickListener() {
+        _pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 _pauseButton.setVisibility(View.GONE);
                 //PauseMenu.setVisibility(View.VISIBLE);
                 _surface.pause(true);
             }
-        });*/
+        });
     }
 
 
@@ -176,7 +176,7 @@ public class GameActivity extends Activity {
     }
 
     private ConstraintLayout _gameLayout;
-    //private ImageButton _pauseButton;
+    private Button _pauseButton;
     private Surface _surface;
     private App _app;
 }

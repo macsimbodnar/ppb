@@ -6,4 +6,6 @@
     <string name="game_leftButton">Left</string>
     <string name="game_rightButton">Right</string>
     <string name="game_fire">Fire</string>
+    <string name="game_pause">Pause</string>
+
 </resources>
