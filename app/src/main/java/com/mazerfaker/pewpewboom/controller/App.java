@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.support.constraint.ConstraintLayout;
 
+import com.mazerfaker.pewpewboom.model.Background;
 import com.mazerfaker.pewpewboom.model.characters.Bullet;
 import com.mazerfaker.pewpewboom.model.characters.Drawable;
 import com.mazerfaker.pewpewboom.model.characters.Ship;
@@ -52,6 +53,8 @@ public class App {
 
         checkCollisions();
 
+        _background.update();
+
         _ship.update();
 
         superWeaponFire();
@@ -79,6 +82,9 @@ public class App {
 
 
     public void draw(Canvas canvas) {
+
+        _background.draw(canvas);
+
         _ship.draw(canvas);
 
         //drawDebug(canvas, _ship.getHitbox());
@@ -184,6 +190,11 @@ public class App {
 
     public void setFireButton(ConstraintLayout button) {
         _fireButton = button;
+    }
+
+
+    public void setBackground(Background background) {
+        _background = background;
     }
 
 
@@ -331,6 +342,7 @@ public class App {
     private boolean _moveRight;
     private boolean _fire;
 
+    private Background _background;
     private Ship _ship;
     private List<Drawable> _enemies;
     private List<Bullet> _bullets;

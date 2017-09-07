@@ -6,6 +6,8 @@ public class Constants {
     public final static int FPS = 60;
     public final static int ENEMY_SPAWN_RATE = 240;
 
+    public final static int INIT_BACKGROUN_SPEED = 5;
+
 
     // SHIP
     public final static int SHIP_LIFE = 3;

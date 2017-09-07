@@ -17,26 +17,18 @@ public class MainThread extends Thread {
         _surfaceHolder = surface.getHolder();
         _isRunning = true;
         _pause = false;
-        _realFPS = 0;
     }
 
 
     @Override
     public void run() {
 
-        Canvas canvas = null;
-
-        long ticksPS = 1000 / Constants.FPS;
-        long startTime = 0;
-        long timeThisFrame = 0;
-        long sleepTime = 0;
+        Canvas canvas;
         App app = App.getInstance();
-
 
         while(_isRunning) {
             if (!_pause) {
                 canvas = null;
-                startTime = System.currentTimeMillis();
 
                 // main game actions update and draw
                 try {
@@ -65,34 +57,8 @@ public class MainThread extends Thread {
                         _surfaceHolder.unlockCanvasAndPost(canvas);
                     }
                 }
-
-
-                // Pick render time and set sleep
-                timeThisFrame = System.currentTimeMillis() - startTime;
-                sleepTime = ticksPS - (timeThisFrame);
-
-                try {
-
-                    if (sleepTime > 0) {
-                        _realFPS = 1000 / timeThisFrame;
-                        sleep(sleepTime);
-                    } else {
-                        sleep(10);
-                    }
-
-                } catch (Exception e) {
-                    Log.e(TAG, "Timer Error");
-                    e.printStackTrace();
-                }
-
-                //Log.d(TAG, "CURRENT FRAME: " + _realFPS);
             }
         }
-    }
-
-
-    public long getFPS() {
-        return _realFPS;
     }
 
 
@@ -106,9 +72,8 @@ public class MainThread extends Thread {
     }
 
 
-    final private SurfaceHolder _surfaceHolder;
+    private final SurfaceHolder _surfaceHolder;
     private Surface _surface;
     private boolean _pause;
     private boolean _isRunning;
-    private long _realFPS;
 }

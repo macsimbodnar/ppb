@@ -10,6 +10,7 @@ import android.view.SurfaceView;
 import android.view.SurfaceHolder.Callback;
 
 import com.mazerfaker.pewpewboom.R;
+import com.mazerfaker.pewpewboom.model.Background;
 import com.mazerfaker.pewpewboom.model.characters.Enemy;
 import com.mazerfaker.pewpewboom.model.characters.Ship;
 import com.mazerfaker.pewpewboom.model.weapons.Blaster;
@@ -30,6 +31,9 @@ public class Surface extends SurfaceView implements Callback {
         _mainThread = new MainThread(this);
 
         _app = App.getInstance();
+
+        Background background = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.background));
+        _app.setBackground(background);
 
         Weapon blaster = new Blaster(BitmapFactory.decodeResource(getResources(), R.drawable.bullet));
 
