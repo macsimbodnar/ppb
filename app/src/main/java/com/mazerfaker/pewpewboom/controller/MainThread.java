@@ -34,12 +34,11 @@ public class MainThread extends Thread {
 
 
         while(_isRunning) {
+            if (!_pause) {
+                canvas = null;
+                startTime = System.currentTimeMillis();
 
-            canvas = null;
-            startTime = System.currentTimeMillis();
-
-            // main game actions update and draw
-            if(!_pause) {
+                // main game actions update and draw
                 try {
 
                     canvas = _surfaceHolder.lockCanvas();
@@ -66,32 +65,29 @@ public class MainThread extends Thread {
                         _surfaceHolder.unlockCanvasAndPost(canvas);
                     }
                 }
-            }
 
-            // Pick render time and set sleep
-            timeThisFrame = System.currentTimeMillis() - startTime;
-            sleepTime = ticksPS-(timeThisFrame);
 
-            try {
+                // Pick render time and set sleep
+                timeThisFrame = System.currentTimeMillis() - startTime;
+                sleepTime = ticksPS - (timeThisFrame);
 
-                if (sleepTime > 0) {
-                    _realFPS = 1000 / timeThisFrame;
-                    sleep(sleepTime);
+                try {
+
+                    if (sleepTime > 0) {
+                        _realFPS = 1000 / timeThisFrame;
+                        sleep(sleepTime);
+                    } else {
+                        sleep(10);
+                    }
+
+                } catch (Exception e) {
+                    Log.e(TAG, "Timer Error");
+                    e.printStackTrace();
                 }
 
-                else {
-                    sleep(10);
-                }
-
-            } catch (Exception e) {
-                Log.e(TAG, "Timer Error");
-                e.printStackTrace();
+                //Log.d(TAG, "CURRENT FRAME: " + _realFPS);
             }
-
-            //Log.d(TAG, "CURRENT FRAME: " + _realFPS);
-
         }
-
     }
 
 

@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 
 import com.mazerfaker.pewpewboom.R;
 import com.mazerfaker.pewpewboom.controller.Surface;
@@ -24,7 +24,7 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        _gameLayout = (ConstraintLayout) findViewById(R.id.game_container);
+        _gameLayout = (ConstraintLayout) findViewById(R.id.canvas_container);
 
         init();
     }
@@ -33,34 +33,26 @@ public class GameActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-
         hideNavbar();
+
+        if(_surface != null) {
+            _surface.pause(false);
+        }
     }
 
 
-    private void hideNavbar() {
-        _gameLayout.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
-                | View.SYSTEM_UI_FLAG_FULLSCREEN
-                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
-    }
-
-
-    /*@Override
+    @Override
     public void onBackPressed() {
-        pausaButton.setVisibility(View.GONE);
-        PauseMenu.setVisibility(View.VISIBLE);
-        game_panel.Pause_game=true;
+        super.onBackPressed();
+        _surface.pause(true);
     }
+
 
     @Override
     protected void onStop() {
-        if (MainMusic.isPlaying())
-            MainMusic.stop();
+        // TODO stop music here
         super.onStop();
-    }*/
+    }
 
 
     /**
@@ -83,7 +75,6 @@ public class GameActivity extends Activity {
                 initSurface();
 
                 setListeners();
-
             }
         });
     }
@@ -101,11 +92,11 @@ public class GameActivity extends Activity {
 
     private void setListeners() {
 
-        RelativeLayout left = (RelativeLayout) findViewById(R.id.game_left);
-        RelativeLayout center = (RelativeLayout) findViewById(R.id.game_center);
-        RelativeLayout right = (RelativeLayout) findViewById(R.id.game_right);
+        LinearLayout left = (LinearLayout) findViewById(R.id.game_left);
+        ConstraintLayout center = (ConstraintLayout) findViewById(R.id.bottom_bar);
+        LinearLayout right = (LinearLayout) findViewById(R.id.game_right);
 
-        _pauseButton = (ImageButton) findViewById(R.id.pause_button);
+        //_pauseButton = (ImageButton) findViewById(R.id.pause_button);
 
 
         left.setOnTouchListener(new View.OnTouchListener() {
@@ -164,19 +155,28 @@ public class GameActivity extends Activity {
         });
 
 
-        _pauseButton.setOnClickListener(new View.OnClickListener() {
+        /*_pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 _pauseButton.setVisibility(View.GONE);
                 //PauseMenu.setVisibility(View.VISIBLE);
                 _surface.pause(true);
             }
-        });
+        });*/
     }
 
 
+    private void hideNavbar() {
+        _gameLayout.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+    }
+
     private ConstraintLayout _gameLayout;
-    private ImageButton _pauseButton;
+    //private ImageButton _pauseButton;
     private Surface _surface;
     private App _app;
 }
