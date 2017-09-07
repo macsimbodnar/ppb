@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.util.Log;
+import android.support.constraint.ConstraintLayout;
 
 import com.mazerfaker.pewpewboom.model.characters.Bullet;
 import com.mazerfaker.pewpewboom.model.characters.Drawable;
@@ -34,7 +34,7 @@ public class App {
         _enemyBullets = new ArrayList<Bullet>();
         _enemies = new ArrayList<Drawable>();
         _gameover = false;
-        _megaWeaponCounter = Constants.MEGA_W_RESET;
+        _megaWeaponCounter = Constants.MEGA_W_RESET - 1; // E' uno perche così il fireButton inizia green e non black
         _megaWeaponReset = Constants.MEGA_W_RESET;
     }
 
@@ -181,6 +181,12 @@ public class App {
         _megaBullets.add(megaBullet);
     }
 
+
+    public void setFireButton(ConstraintLayout button) {
+        _fireButton = button;
+    }
+
+
     private void checkCollisions() {
         megaBulletsCollision();
         enemyBulletsCollisons();
@@ -292,16 +298,34 @@ public class App {
 
             _fire = false;
             _megaWeaponCounter = 0;
+
+            setFireButtonColor(Color.RED);
         }
 
         if(_megaWeaponCounter < _megaWeaponReset) {
             _megaWeaponCounter++;
+
+            if(_megaWeaponCounter == _megaWeaponReset) {
+                setFireButtonColor(Color.GREEN);
+            }
         }
+    }
+
+
+    private void setFireButtonColor(final int color) {
+
+        _fireButton.post(new Runnable() {
+            @Override
+            public void run() {
+                _fireButton.setBackgroundColor(color);
+            }
+        });
     }
 
 
     private int _windowWidth;
     private int _windowHeght;
+    private ConstraintLayout _fireButton;
 
     private boolean _moveLeft;
     private boolean _moveRight;

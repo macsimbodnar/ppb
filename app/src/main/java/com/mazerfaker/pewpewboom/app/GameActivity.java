@@ -25,6 +25,11 @@ public class GameActivity extends Activity {
         setContentView(R.layout.activity_game);
 
         _gameLayout = (ConstraintLayout) findViewById(R.id.canvas_container);
+        _fire = (ConstraintLayout) findViewById(R.id.bottom_bar);
+        _pauseButton = (Button) findViewById(R.id.pause_button);
+
+        _app = App.getInstance();
+        _app.setFireButton(_fire);
 
         init();
     }
@@ -68,8 +73,6 @@ public class GameActivity extends Activity {
                 _gameLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
                 //Log.d(TAG, "SET SIZES W = " + width + "  H = " + height);
-                _app = App.getInstance();
-
                 _app.setWindowSize(_gameLayout.getMeasuredWidth(), _gameLayout.getMeasuredHeight());
 
                 initSurface();
@@ -93,10 +96,7 @@ public class GameActivity extends Activity {
     private void setListeners() {
 
         LinearLayout left = (LinearLayout) findViewById(R.id.game_left);
-        ConstraintLayout center = (ConstraintLayout) findViewById(R.id.bottom_bar);
         LinearLayout right = (LinearLayout) findViewById(R.id.game_right);
-
-        _pauseButton = (Button) findViewById(R.id.pause_button);
 
 
         left.setOnTouchListener(new View.OnTouchListener() {
@@ -118,17 +118,17 @@ public class GameActivity extends Activity {
         });
 
 
-        center.setOnTouchListener(new View.OnTouchListener() {
+        _fire.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
 
                 if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    //Log.d(TAG, "CENTER DOWN");
+                    //Log.d(TAG, "_fire DOWN");
                     _app.fire();
                 }
 
                 //if(motionEvent.getAction() == MotionEvent.ACTION_UP) {
-                    //Log.d(TAG, "CENTER UP");
+                    //Log.d(TAG, "_fire UP");
                 //}
 
                 return true;
@@ -178,5 +178,6 @@ public class GameActivity extends Activity {
     private ConstraintLayout _gameLayout;
     private Button _pauseButton;
     private Surface _surface;
+    ConstraintLayout _fire;
     private App _app;
 }
