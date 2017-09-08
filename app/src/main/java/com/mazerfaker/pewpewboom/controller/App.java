@@ -165,6 +165,7 @@ public class App {
 
     public void setShip(Ship ship) {
         _ship = ship;
+        _shipTop = ( int ) _ship.getHitbox().top + 2;
     }
 
 
@@ -207,8 +208,10 @@ public class App {
 
 
     private void megaBulletsCollision() {
+        Bullet b;
+
         for (Iterator<Bullet> iteratorB = _megaBullets.iterator(); iteratorB.hasNext(); ) {
-            Bullet b = iteratorB.next();
+            b = iteratorB.next();
 
             // check if megabulllet time is end
             if(b.getLifetime() == 0) {
@@ -231,30 +234,37 @@ public class App {
 
 
     private void enemyBulletsCollisons() {
+        Bullet b;
+        Drawable d;
+        RectF enemyHotbox;
+        RectF bulletHitbox;
+
         for (Iterator<Bullet> iteratorB = _bullets.iterator(); iteratorB.hasNext(); ) {
-            Bullet b = iteratorB.next();
+            b = iteratorB.next();
+            bulletHitbox = b.getHitbox();
 
             // check ship bullet out of screen
-            if(b.getHitbox().bottom < 0) {
+            if(bulletHitbox.bottom < 0) {
                 iteratorB.remove();
                 continue;
             }
 
             for (Iterator<Drawable> iteratorE = _enemies.iterator(); iteratorE.hasNext(); ) {
-                Drawable d = iteratorE.next();
-
-                // check enemy out of screen
-                if(d.getHitbox().top > _windowHeght) {
-                    iteratorE.remove();
-                    continue;
-                }
+                d = iteratorE.next();
+                enemyHotbox = d.getHitbox();
 
                 // check collision
-                if(RectF.intersects(b.getHitbox(), d.getHitbox())) {
+                if(RectF.intersects(bulletHitbox, enemyHotbox)) {
                     if(d.hit(b.getDamage())) {
                         iteratorE.remove();
                     }
                     iteratorB.remove();
+                    continue;
+                }
+
+                // check enemy out of screen
+                if(enemyHotbox.top > _windowHeght) {
+                    iteratorE.remove();
                 }
             }
         }
@@ -262,20 +272,29 @@ public class App {
 
 
     private void shipBulletsCollisions() {
-        for (Iterator<Bullet> iterator = _enemyBullets.iterator(); iterator.hasNext(); ) {
-            Bullet b = iterator.next();
+        Bullet b;
+        RectF shipHitbox = _ship.getHitbox();
+        RectF bulletHitbox;
 
-            // check enemy bullet out of screen
-            if(b.getHitbox().top > _windowHeght) {
+        for (Iterator<Bullet> iterator = _enemyBullets.iterator(); iterator.hasNext(); ) {
+            b = iterator.next();
+            bulletHitbox = b.getHitbox();
+
+            if(bulletHitbox.bottom < _shipTop) {
+                break;
+            }
+
+            // check collision
+            if(RectF.intersects(shipHitbox, bulletHitbox)) {
+                if(_ship.hit(b.getDamage())) {
+                    _gameover = true;
+                }
                 iterator.remove();
                 continue;
             }
 
-            // check collision
-            if(RectF.intersects(_ship.getHitbox(), b.getHitbox())) {
-                if(_ship.hit(b.getDamage())) {
-                    _gameover = true;
-                }
+            // check enemy bullet out of screen
+            if(b.getHitbox().top > _windowHeght) {
                 iterator.remove();
             }
         }
@@ -284,10 +303,18 @@ public class App {
 
     private void shipEnemiesCollisions() {
 
+        RectF shipHitbox = _ship.getHitbox();
+        RectF enemyHitbox;
+
         // check collision
         for (Iterator<Drawable> iterator = _enemies.iterator(); iterator.hasNext(); ) {
-            Drawable d = iterator.next();
-            if(RectF.intersects(_ship.getHitbox(), d.getHitbox())) {
+            enemyHitbox = iterator.next().getHitbox();
+
+            if(enemyHitbox.bottom < _shipTop) {
+                break;
+            }
+
+            if(RectF.intersects(shipHitbox, enemyHitbox)) {
                 _gameover = true;
                 iterator.remove();
             }
@@ -352,4 +379,5 @@ public class App {
 
     private int _megaWeaponCounter;
     private int _megaWeaponReset;
+    private int _shipTop;
 }

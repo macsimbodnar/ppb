@@ -36,6 +36,7 @@ public class MainThread extends Thread {
                     canvas = _surfaceHolder.lockCanvas();
                     synchronized (_surfaceHolder) {
                         synchronized (App.getInstance()) {
+
                             _surface.update();
                             _surface.draw(canvas);
 
