@@ -26,16 +26,27 @@ public class MainThread extends Thread {
         Canvas canvas;
         App app = App.getInstance();
 
-        while(_isRunning) {
-            if (!_pause) {
+        synchronized (this) {
+            while (_isRunning) {
+
+                if (_pause) {
+                    try {
+                        _pause = false;
+                        wait();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                        Log.e(TAG, "Error to set game in pause");
+                    }
+                }
+
                 canvas = null;
 
                 // main game actions update and draw
                 try {
 
                     canvas = _surfaceHolder.lockCanvas();
-                    synchronized (_surfaceHolder) {
-                        synchronized (App.getInstance()) {
+                    //synchronized (_surfaceHolder) {
+                      //  synchronized (App.getInstance()) {
 
                             _surface.update();
                             _surface.draw(canvas);
@@ -43,9 +54,9 @@ public class MainThread extends Thread {
                             if (app.isGameOver()) {
                                 return;
                             }
-                        }
+                        //}
 
-                    }
+                    //}
 
                 } catch (Exception e) {
 
@@ -63,13 +74,13 @@ public class MainThread extends Thread {
     }
 
 
-    public void setRunning(boolean running) {
-        _isRunning = running;
+    public void stopGame() {
+        _isRunning = false;
     }
 
 
-    public void pause(boolean pause) {
-        _pause = pause;
+    public void pause() {
+        _pause = true;
     }
 
 

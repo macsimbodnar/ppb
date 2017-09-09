@@ -35,7 +35,7 @@ public class App {
         _enemyBullets = new ArrayList<Bullet>();
         _enemies = new ArrayList<Drawable>();
         _gameover = false;
-        _megaWeaponCounter = Constants.MEGA_W_RESET - 1; // E' uno perche così il fireButton inizia green e non black
+        _megaWeaponCounter = Constants.MEGA_W_RESET; // E' uno perche così il fireButton inizia green e non black
         _megaWeaponReset = Constants.MEGA_W_RESET;
     }
 
@@ -199,6 +199,20 @@ public class App {
     }
 
 
+    public void resetFireButton() {
+        _megaWeaponCounter = Constants.MEGA_W_RESET - 1;
+    }
+
+
+    public void checkFireButton() {
+        if(_megaWeaponCounter < _megaWeaponReset) {
+            setFireButtonColor(false);
+        } else {
+            setFireButtonColor(true);
+        }
+    }
+
+
     private void checkCollisions() {
         megaBulletsCollision();
         enemyBulletsCollisons();
@@ -337,24 +351,32 @@ public class App {
             _fire = false;
             _megaWeaponCounter = 0;
 
-            setFireButtonColor(Color.RED);
+            setFireButtonColor(false);
         }
 
         if(_megaWeaponCounter < _megaWeaponReset) {
             _megaWeaponCounter++;
 
             if(_megaWeaponCounter == _megaWeaponReset) {
-                setFireButtonColor(Color.GREEN);
+                setFireButtonColor(true);
             }
         }
     }
 
 
-    private void setFireButtonColor(final int color) {
+    private void setFireButtonColor(final boolean active) {
 
         _fireButton.post(new Runnable() {
             @Override
             public void run() {
+
+                int color;
+                if(active) {
+                    color = Color.GREEN;
+                } else {
+                    color = Color.RED;
+                }
+
                 _fireButton.setBackgroundColor(color);
             }
         });

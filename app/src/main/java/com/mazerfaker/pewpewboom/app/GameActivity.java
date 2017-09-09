@@ -27,6 +27,7 @@ public class GameActivity extends Activity {
         _gameLayout = (ConstraintLayout) findViewById(R.id.canvas_container);
         _fire = (ConstraintLayout) findViewById(R.id.bottom_bar);
         _pauseButton = (Button) findViewById(R.id.pause_button);
+        _pauseButton.setVisibility(View.VISIBLE);
 
         _app = App.getInstance();
         _app.setFireButton(_fire);
@@ -41,16 +42,17 @@ public class GameActivity extends Activity {
         hideNavbar();
 
         if(_surface != null) {
-            _surface.pause(false);
+            _surface.resume();
         }
     }
 
 
     @Override
     public void onBackPressed() {
+        _surface.stop();
         super.onBackPressed();
-        _surface.pause(true);
     }
+
 
 
     @Override
@@ -160,7 +162,7 @@ public class GameActivity extends Activity {
             public void onClick(View v) {
                 _pauseButton.setVisibility(View.GONE);
                 //PauseMenu.setVisibility(View.VISIBLE);
-                _surface.pause(true);
+                _surface.pause();
             }
         });
     }

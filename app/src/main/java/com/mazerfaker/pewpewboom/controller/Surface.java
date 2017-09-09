@@ -31,6 +31,7 @@ public class Surface extends SurfaceView implements Callback {
         _mainThread = new MainThread(this);
 
         _app = App.getInstance();
+        _app.checkFireButton();
 
         Background background = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.background));
         _app.setBackground(background);
@@ -95,8 +96,18 @@ public class Surface extends SurfaceView implements Callback {
     }
 
 
-    public void pause(boolean pause) {
-        _mainThread.pause(pause);
+    public void pause() {
+        _mainThread.pause();
+    }
+
+
+    public void resume() {
+        _mainThread.notify();
+    }
+
+
+    public void stop() {
+        _mainThread.stopGame();
     }
 
 
@@ -117,7 +128,7 @@ public class Surface extends SurfaceView implements Callback {
     }
 
 
-    private MainThread _mainThread;
+    private final MainThread _mainThread;
 
     private int _enemySpawnRate;
     private int _enemySpawnCount;

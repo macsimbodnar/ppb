@@ -3,12 +3,16 @@ package com.mazerfaker.pewpewboom.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.mazerfaker.pewpewboom.R;
 
 public class MainMenuActivity extends Activity {
+
+    private static final String TAG = "MainMenuActivity";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,11 +23,14 @@ public class MainMenuActivity extends Activity {
 
         Button startGame = (Button) findViewById(R.id.mainMenu_startButton);
 
+
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent gameIntent = new Intent(MainMenuActivity.this, GameActivity.class);
                 startActivity(gameIntent);
+
             }
         });
     }
@@ -36,6 +43,11 @@ public class MainMenuActivity extends Activity {
         hideNavbar();
     }
 
+
+    @Override // WHEN was in background and come back
+    protected void onRestart() {
+        super.onRestart();
+    }
 
     private void hideNavbar() {
         _mainView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LOW_PROFILE
