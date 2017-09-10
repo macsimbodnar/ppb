@@ -223,9 +223,12 @@ public class App {
 
     private void megaBulletsCollision() {
         Bullet b;
+        Bullet eb;
+        Drawable d;
 
         for (Iterator<Bullet> iteratorB = _megaBullets.iterator(); iteratorB.hasNext(); ) {
             b = iteratorB.next();
+            RectF superBulletHitbox = b.getHitbox();
 
             // check if megabulllet time is end
             if(b.getLifetime() == 0) {
@@ -233,14 +236,25 @@ public class App {
                 continue;
             }
 
+            // check enemy collision
             for (Iterator<Drawable> iteratorE = _enemies.iterator(); iteratorE.hasNext(); ) {
-                Drawable d = iteratorE.next();
+                d = iteratorE.next();
 
                 // check collision
-                if(RectF.intersects(b.getHitbox(), d.getHitbox())) {
+                if(RectF.intersects(superBulletHitbox, d.getHitbox())) {
                     if(d.hit(b.getDamage())) {
                         iteratorE.remove();
                     }
+                }
+            }
+
+            // check enemy bullets collision
+            for(Iterator<Bullet> iteratorEB = _enemyBullets.iterator(); iteratorEB.hasNext(); ) {
+                eb = iteratorEB.next();
+
+                // check collision
+                if(RectF.intersects(superBulletHitbox, eb.getHitbox())) {
+                    iteratorEB.remove();
                 }
             }
         }
