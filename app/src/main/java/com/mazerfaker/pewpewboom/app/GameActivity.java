@@ -66,7 +66,10 @@ public class GameActivity extends Activity {
         _gameLayout = (ConstraintLayout) findViewById(R.id.canvas_container);
         _fire = (ConstraintLayout) findViewById(R.id.bottom_bar);
         _pauseButton = (ImageButton) findViewById(R.id.pause_button);
+
         _pauseMenuContainer = (ConstraintLayout) findViewById(R.id.pause_menu_container);
+        _pauseMenuContainer.setVisibility(View.GONE);
+
         _continueButton = (Button) findViewById(R.id.continue_button);
     }
 
