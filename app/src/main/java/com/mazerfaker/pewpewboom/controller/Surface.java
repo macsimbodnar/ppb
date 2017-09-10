@@ -109,6 +109,8 @@ public class Surface extends SurfaceView implements Callback {
 
 
     public void stop() {
+        // Need to resume before to terminate correctly thread
+        resume();
         _mainThread.stopGame();
     }
 

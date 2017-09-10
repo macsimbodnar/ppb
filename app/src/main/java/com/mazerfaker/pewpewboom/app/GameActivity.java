@@ -71,6 +71,7 @@ public class GameActivity extends Activity {
         _pauseMenuContainer.setVisibility(View.GONE);
 
         _continueButton = (Button) findViewById(R.id.continue_button);
+        _returnButton = (Button) findViewById(R.id.return_button);
     }
 
 
@@ -196,6 +197,15 @@ public class GameActivity extends Activity {
                 _surface.resume();
             }
         });
+
+
+        _returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                _surface.stop();
+                GameActivity.this.finish();
+            }
+        });
     }
 
 
@@ -212,6 +222,7 @@ public class GameActivity extends Activity {
     private ConstraintLayout _gameLayout;
     private ImageButton _pauseButton;
     private Button _continueButton;
+    private Button _returnButton;
     private ConstraintLayout _pauseMenuContainer;
     private Surface _surface;
     private ConstraintLayout _fire;
