@@ -6,13 +6,14 @@ import android.support.constraint.ConstraintLayout;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
-import android.view.WindowManager;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import com.mazerfaker.pewpewboom.R;
 import com.mazerfaker.pewpewboom.controller.Surface;
 import com.mazerfaker.pewpewboom.controller.App;
+
+import java.util.ArrayList;
 
 public class GameActivity extends Activity {
 
@@ -26,8 +27,9 @@ public class GameActivity extends Activity {
 
         _gameLayout = (ConstraintLayout) findViewById(R.id.canvas_container);
         _fire = (ConstraintLayout) findViewById(R.id.bottom_bar);
-        _pauseButton = (Button) findViewById(R.id.pause_button);
-        _pauseButton.setVisibility(View.VISIBLE);
+        _pauseButton = (ImageButton) findViewById(R.id.pause_button);
+
+
 
         _app = App.getInstance();
         _app.setFireButton(_fire);
@@ -88,10 +90,15 @@ public class GameActivity extends Activity {
     private void initSurface() {
 
         _surface = new Surface(getApplicationContext());
+
+        ArrayList<View> a = new ArrayList<>();
+        a.add(_pauseButton);
+        _surface.addTouchables(a);
+
         _gameLayout.addView(_surface);
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
     }
 
 
@@ -161,7 +168,6 @@ public class GameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 _pauseButton.setVisibility(View.GONE);
-                //PauseMenu.setVisibility(View.VISIBLE);
                 _surface.pause();
             }
         });
@@ -177,9 +183,10 @@ public class GameActivity extends Activity {
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
     }
 
+
     private ConstraintLayout _gameLayout;
-    private Button _pauseButton;
+    private ImageButton _pauseButton;
     private Surface _surface;
-    ConstraintLayout _fire;
+    private ConstraintLayout _fire;
     private App _app;
 }
