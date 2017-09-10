@@ -6,6 +6,7 @@ import android.support.constraint.ConstraintLayout;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
@@ -25,16 +26,13 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        _gameLayout = (ConstraintLayout) findViewById(R.id.canvas_container);
-        _fire = (ConstraintLayout) findViewById(R.id.bottom_bar);
-        _pauseButton = (ImageButton) findViewById(R.id.pause_button);
+        initViewElements();
 
+        initApp();
 
+        asyncInitSurface();
 
-        _app = App.getInstance();
-        _app.setFireButton(_fire);
-
-        init();
+        setListeners();
     }
 
 
@@ -64,10 +62,25 @@ public class GameActivity extends Activity {
     }
 
 
+    private void initViewElements() {
+        _gameLayout = (ConstraintLayout) findViewById(R.id.canvas_container);
+        _fire = (ConstraintLayout) findViewById(R.id.bottom_bar);
+        _pauseButton = (ImageButton) findViewById(R.id.pause_button);
+        _pauseMenuContainer = (ConstraintLayout) findViewById(R.id.pause_menu_container);
+        _continueButton = (Button) findViewById(R.id.continue_button);
+    }
+
+
+    private void initApp() {
+        _app = App.getInstance();
+        _app.setFireButton(_fire);
+    }
+
+
     /**
      * Have to init here because need game_layout size before initSurface
      */
-    private void init() {
+    private void asyncInitSurface() {
 
         ViewTreeObserver vto = _gameLayout.getViewTreeObserver();
         vto.addOnGlobalLayoutListener (new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -80,8 +93,6 @@ public class GameActivity extends Activity {
                 _app.setWindowSize(_gameLayout.getMeasuredWidth(), _gameLayout.getMeasuredHeight());
 
                 initSurface();
-
-                setListeners();
             }
         });
     }
@@ -167,8 +178,19 @@ public class GameActivity extends Activity {
         _pauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                _pauseButton.setVisibility(View.GONE);
                 _surface.pause();
+                _pauseButton.setVisibility(View.GONE);
+                _pauseMenuContainer.setVisibility(View.VISIBLE);
+            }
+        });
+
+
+        _continueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                _pauseMenuContainer.setVisibility(View.GONE);
+                _pauseButton.setVisibility(View.VISIBLE);
+                _surface.resume();
             }
         });
     }
@@ -186,6 +208,8 @@ public class GameActivity extends Activity {
 
     private ConstraintLayout _gameLayout;
     private ImageButton _pauseButton;
+    private Button _continueButton;
+    private ConstraintLayout _pauseMenuContainer;
     private Surface _surface;
     private ConstraintLayout _fire;
     private App _app;

@@ -102,7 +102,9 @@ public class Surface extends SurfaceView implements Callback {
 
 
     public void resume() {
-        _mainThread.notify();
+        synchronized (_mainThread) {
+            _mainThread.notify();
+        }
     }
 
 

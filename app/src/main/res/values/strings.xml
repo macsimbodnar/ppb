@@ -3,7 +3,7 @@
 
     <string name="title_activity_main_menu">MainMenuActivity</string>
     <string name="mainMenu_startButton">STARTA IMMEDIATASUBITO</string>
-    <string name="mainMenu_continueButton">CONTINUA IMMEDIATASUBITO</string>
+    <string name="continue_button">CONTINUA IMMEDIATASUBITO</string>
     <string name="game_leftButton">Left</string>
     <string name="game_rightButton">Right</string>
     <string name="game_fire">Fire</string>
