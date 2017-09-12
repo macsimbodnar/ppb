@@ -2,6 +2,10 @@ package com.mazerfaker.pewpewboom.util;
 
 public class Constants {
 
+    // ACTIVITY
+    public final static String CONTINUE_GAME = "PPB_CONTINUE_GAME";
+
+
     // GAME
     public final static int FPS = 60;
     public final static int ENEMY_SPAWN_RATE = 240;

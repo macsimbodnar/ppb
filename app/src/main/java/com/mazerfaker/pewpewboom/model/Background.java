@@ -12,11 +12,11 @@ public class Background {
 
     public Background(Bitmap bitmap) {
 
-        _app = App.getInstance();
+        App app = App.getInstance();
         // TODO da rimuovere il resize. Non sono sicuro serva se si sceglie bene il background
         // Ratio formula: (original height / original width) x new width = new height
         //float ratioHeight = (((float) bitmap.getHeight()) / ((float) bitmap.getWidth())) * _app.getWindowWidth();
-        _bitmap = Bitmap.createScaledBitmap(bitmap, _app.getWindowWidth(), _app.getWindowHeght(), true);
+        _bitmap = Bitmap.createScaledBitmap(bitmap, app.getWindowWidth(), app.getWindowHeght(), true);
 
         _backgroundSpeed = Constants.INIT_BACKGROUN_SPEED;
         _y = 0;
@@ -39,9 +39,9 @@ public class Background {
         canvas.drawBitmap(_bitmap, .0f, _y - _bitmapHeight, null);
     }
 
+
     private float _y;
     private Bitmap _bitmap;
     private int _bitmapHeight;
-    private App _app;
     private int _backgroundSpeed;
 }

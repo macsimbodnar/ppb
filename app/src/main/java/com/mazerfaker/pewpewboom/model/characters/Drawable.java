@@ -8,6 +8,7 @@ public interface Drawable {
 
     public void update();
     public void draw(Canvas canvas);
+    //public void reset();
     public RectF getHitbox();
     public boolean hit(int damage);
 

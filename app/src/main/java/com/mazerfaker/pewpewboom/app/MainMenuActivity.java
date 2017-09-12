@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.mazerfaker.pewpewboom.R;
+import com.mazerfaker.pewpewboom.util.Constants;
 
 public class MainMenuActivity extends Activity {
 
@@ -23,14 +24,27 @@ public class MainMenuActivity extends Activity {
 
         Button startGame = (Button) findViewById(R.id.mainMenu_startButton);
 
+        _continueButton = (Button) findViewById(R.id.mainMenu_continueButton);
+        _continueButton.setVisibility(View.GONE);
+
 
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 Intent gameIntent = new Intent(MainMenuActivity.this, GameActivity.class);
+                gameIntent.putExtra(Constants.CONTINUE_GAME, false);
                 startActivity(gameIntent);
 
+            }
+        });
+
+        _continueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent gameIntent = new Intent(MainMenuActivity.this, GameActivity.class);
+                gameIntent.putExtra(Constants.CONTINUE_GAME, true);
+                startActivity(gameIntent);
             }
         });
     }
@@ -47,6 +61,8 @@ public class MainMenuActivity extends Activity {
     @Override // WHEN was in background and come back
     protected void onRestart() {
         super.onRestart();
+
+        _continueButton.setVisibility(View.VISIBLE);
     }
 
     private void hideNavbar() {
@@ -61,4 +77,5 @@ public class MainMenuActivity extends Activity {
 
 
     private View _mainView;
+    private Button _continueButton;
 }

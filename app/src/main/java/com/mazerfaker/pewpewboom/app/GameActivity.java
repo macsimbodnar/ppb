@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import com.mazerfaker.pewpewboom.R;
 import com.mazerfaker.pewpewboom.controller.Surface;
 import com.mazerfaker.pewpewboom.controller.App;
+import com.mazerfaker.pewpewboom.util.Constants;
 
 import java.util.ArrayList;
 
@@ -76,8 +77,14 @@ public class GameActivity extends Activity {
 
 
     private void initApp() {
+
         _app = App.getInstance();
         _app.setFireButton(_fire);
+
+        boolean continueGame = getIntent().getBooleanExtra(Constants.CONTINUE_GAME, false);
+        if(!continueGame) {
+            _app.reset();
+        }
     }
 
 

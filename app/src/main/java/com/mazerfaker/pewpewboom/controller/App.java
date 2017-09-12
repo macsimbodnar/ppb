@@ -49,6 +49,24 @@ public class App {
     }
 
 
+    public void reset() {
+        _moveLeft = false;
+        _moveRight = false;
+        _fire = false;
+
+        _ship = null;
+        _enemies.clear();
+        _bullets.clear();
+        _megaBullets.clear();
+        _enemyBullets.clear();
+        _gameover = false;
+
+        _megaWeaponCounter = Constants.MEGA_W_RESET;
+        _megaWeaponReset = Constants.MEGA_W_RESET;
+        _shipTop = 0;
+    }
+
+
     public void update() {
 
         checkCollisions();
