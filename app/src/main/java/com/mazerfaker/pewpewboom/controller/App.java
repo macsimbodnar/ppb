@@ -10,6 +10,7 @@ import android.support.constraint.ConstraintLayout;
 import com.mazerfaker.pewpewboom.model.Background;
 import com.mazerfaker.pewpewboom.model.characters.Bullet;
 import com.mazerfaker.pewpewboom.model.characters.Drawable;
+import com.mazerfaker.pewpewboom.model.characters.Enemy;
 import com.mazerfaker.pewpewboom.model.characters.Ship;
 import com.mazerfaker.pewpewboom.util.Constants;
 
@@ -37,6 +38,10 @@ public class App {
         _gameover = false;
         _megaWeaponCounter = Constants.MEGA_W_RESET; // E' uno perche così il fireButton inizia green e non black
         _megaWeaponReset = Constants.MEGA_W_RESET;
+
+        _enemySpawnRate = Constants.ENEMY_SPAWN_RATE;
+        _enemySpawnCount = 0;
+        _enemyVariety = new ArrayList<Enemy>();
     }
 
 
@@ -64,10 +69,16 @@ public class App {
         _megaWeaponCounter = Constants.MEGA_W_RESET;
         _megaWeaponReset = Constants.MEGA_W_RESET;
         _shipTop = 0;
+
+        _enemySpawnRate = Constants.ENEMY_SPAWN_RATE;
+        _enemySpawnCount = 0;
+        _enemyVariety.clear();
     }
 
 
     public void update() {
+
+        spawnEnemy();
 
         checkCollisions();
 
@@ -228,6 +239,11 @@ public class App {
         } else {
             setFireButtonColor(true);
         }
+    }
+
+
+    public void setEnemyVariety(List<Enemy> enemies) {
+        _enemyVariety = enemies;
     }
 
 
@@ -415,6 +431,21 @@ public class App {
     }
 
 
+    private void spawnEnemy() {
+        _enemySpawnCount++;
+        if(_enemySpawnCount > _enemySpawnRate) {
+            addEnemy();
+            _enemySpawnCount = 0;
+        }
+    }
+
+
+    private void addEnemy() {
+        // TODO ovviamente da migliorare
+        addEnemy(_enemyVariety.get(0));
+    }
+
+
     private int _windowWidth;
     private int _windowHeght;
     private ConstraintLayout _fireButton;
@@ -434,4 +465,9 @@ public class App {
     private int _megaWeaponCounter;
     private int _megaWeaponReset;
     private int _shipTop;
+
+    private List<Enemy> _enemyVariety;
+
+    private int _enemySpawnRate;
+    private int _enemySpawnCount;
 }

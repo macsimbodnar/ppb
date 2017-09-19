@@ -19,6 +19,11 @@ import com.mazerfaker.pewpewboom.model.weapons.EnemyBlaster;
 import com.mazerfaker.pewpewboom.model.weapons.Weapon;
 import com.mazerfaker.pewpewboom.util.Constants;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 public class Surface extends SurfaceView implements Callback {
 
@@ -47,9 +52,6 @@ public class Surface extends SurfaceView implements Callback {
         Ship ship = new Ship(BitmapFactory.decodeResource(getResources(), R.drawable.ship), blaster, defaultMegaWeapon);
 
         _app.setShip(ship);
-
-        _enemySpawnRate = Constants.ENEMY_SPAWN_RATE;
-        _enemySpawnCount = 0;
     }
 
 
@@ -84,7 +86,6 @@ public class Surface extends SurfaceView implements Callback {
 
 
     public void update() {
-        spawnEnemy();
         _app.update();
     }
 
@@ -115,27 +116,17 @@ public class Surface extends SurfaceView implements Callback {
     }
 
 
-    private void addEnemy() {
+    private void setEnemies() {
+
         Weapon enemyBlaster = new EnemyBlaster(BitmapFactory.decodeResource(getResources(), R.drawable.bullet2));
         Enemy enemy = new Enemy(BitmapFactory.decodeResource(getResources(), R.drawable.enemy), enemyBlaster, Constants.SIMPLE_ENEMY_LIFE);
 
-        _app.addEnemy(enemy);
+        List<Enemy> enemies = new ArrayList<>();
+        enemies.add(enemy);
+
+        _app.setEnemyVariety(enemies);
     }
-
-
-    private void spawnEnemy() {
-        _enemySpawnCount++;
-        if(_enemySpawnCount > _enemySpawnRate) {
-            addEnemy();
-            _enemySpawnCount = 0;
-        }
-    }
-
 
     private final MainThread _mainThread;
-
-    private int _enemySpawnRate;
-    private int _enemySpawnCount;
-
     private App _app;
 }

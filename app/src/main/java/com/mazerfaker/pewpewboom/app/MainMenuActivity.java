@@ -61,7 +61,7 @@ public class MainMenuActivity extends Activity {
     @Override // WHEN was in background and come back
     protected void onRestart() {
         super.onRestart();
-
+        // TODO forse non è il posto giusto questo per metterlo a visibile (da verificare se quando ritorno da background scatta)
         _continueButton.setVisibility(View.VISIBLE);
     }
 

@@ -38,7 +38,21 @@ public class GameActivity extends Activity {
 
 
     @Override
-    protected void onResume() {
+    public void onRestart() {
+        super.onRestart();
+        // TODO
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // TODO
+    }
+
+
+    @Override
+    public void onResume() {
         super.onResume();
         hideNavbar();
 
@@ -49,17 +63,30 @@ public class GameActivity extends Activity {
 
 
     @Override
+    public void onPause() {
+        // TODO
+        super.onPause();
+    }
+
+
+    @Override
     public void onBackPressed() {
         _surface.stop();
         super.onBackPressed();
     }
 
 
-
     @Override
-    protected void onStop() {
+    public void onStop() {
         // TODO stop music here
         super.onStop();
+    }
+
+
+    @Override
+    public void onDestroy() {
+        // TODO
+        super.onDestroy();
     }
 
 
