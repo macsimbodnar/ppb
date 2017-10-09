@@ -6,13 +6,15 @@ import android.graphics.Canvas;
 import com.mazerfaker.pewpewboom.model.weapons.Weapon;
 import com.mazerfaker.pewpewboom.util.Constants;
 
+import java.util.List;
+
 public class Ship extends Character implements Drawable {
 
     private static final String TAG = "Ship";
 
 
-    public Ship(Bitmap bitmap, Weapon weapon, Weapon megaWeapon) {
-        super(bitmap, weapon, Constants.SHIP_LIFE, Constants.SHIP_X_SPEED, 0);
+    public Ship(Bitmap bitmap, List<Bitmap> animation, Weapon weapon, Weapon megaWeapon) {
+        super(bitmap, animation, weapon, Constants.SHIP_LIFE, Constants.SHIP_X_SPEED, 0);
 
         float initialX = (((float) _app.getWindowWidth()) / 2.0f) - (_bitmap.getWidth() / 2.0f);
         float initialY = ((float) _app.getWindowHeght()) - _bitmap.getHeight() - Constants.SHIP_BOTTOM_PADDING;
@@ -32,7 +34,19 @@ public class Ship extends Character implements Drawable {
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(_bitmap, _x, _y, null);
+        super.draw(canvas);
+    }
+
+
+    @Override
+    public boolean drawAnimation(Canvas canvas) {
+        if(_animationFramesIterator.hasNext()) {
+            _bitmap = _animationFramesIterator.next();
+            return false;
+        } else {
+            _app.gameOver();
+            return true;
+        }
     }
 
 

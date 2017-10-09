@@ -35,23 +35,9 @@ public class Surface extends SurfaceView implements Callback {
 
         _mainThread = new MainThread(this);
 
-        _app = App.getInstance();
-        _app.checkFireButton();
+        setApp();
 
-        Background background = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.background));
-        _app.setBackground(background);
-
-        Weapon blaster = new Blaster(BitmapFactory.decodeResource(getResources(), R.drawable.bullet));
-
-        // TODO da togliere il resize qui e creare delle immagini adatte
-        Bitmap laser = BitmapFactory.decodeResource(getResources(), R.drawable.laser);
-        Bitmap scaledLaser = Bitmap.createScaledBitmap(laser, laser.getWidth(), _app.getWindowHeght(), true);
-
-        Weapon defaultMegaWeapon = new DefaulMegaWeapon(scaledLaser);
-
-        Ship ship = new Ship(BitmapFactory.decodeResource(getResources(), R.drawable.ship), blaster, defaultMegaWeapon);
-
-        _app.setShip(ship);
+        setShip();
 
         setEnemies();
     }
@@ -118,12 +104,50 @@ public class Surface extends SurfaceView implements Callback {
     }
 
 
+    private void setApp() {
+        _app = App.getInstance();
+        _app.checkFireButton();
+
+        Background background = new Background(BitmapFactory.decodeResource(getResources(), R.drawable.background));
+        _app.setBackground(background);
+    }
+
+
+    private void setShip() {
+        Weapon blaster = new Blaster(BitmapFactory.decodeResource(getResources(), R.drawable.bullet));
+
+        // TODO da togliere il resize qui e creare delle immagini adatte
+        Bitmap laser = BitmapFactory.decodeResource(getResources(), R.drawable.laser);
+        Bitmap scaledLaser = Bitmap.createScaledBitmap(laser, laser.getWidth(), _app.getWindowHeght(), true);
+
+        Weapon defaultMegaWeapon = new DefaulMegaWeapon(scaledLaser);
+
+        List<Bitmap> boomAnimation = new ArrayList<>();
+        boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom1));
+        boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom2));
+        boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom3));
+        boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom4));
+
+        Ship ship = new Ship(BitmapFactory.decodeResource(getResources(), R.drawable.ship), boomAnimation, blaster, defaultMegaWeapon);
+
+        _app.setShip(ship);
+    }
+
+
     private void setEnemies() {
 
         Weapon enemyBlaster = new EnemyBlaster(BitmapFactory.decodeResource(getResources(), R.drawable.bullet2));
 
+        List<Bitmap> boomAnimation = new ArrayList<>();
+
+        boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom1));
+        boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom2));
+        boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom3));
+        boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom4));
+
         Enemy enemy = new Enemy(
                 BitmapFactory.decodeResource(getResources(), R.drawable.enemy),
+                boomAnimation,
                 enemyBlaster,
                 Constants.SIMPLE_ENEMY_LIFE,
                 Constants.SIMPLE_ENEMY_POINTS);

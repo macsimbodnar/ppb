@@ -8,6 +8,8 @@ import com.mazerfaker.pewpewboom.model.characters.Bullet;
 import com.mazerfaker.pewpewboom.model.characters.Character;
 import com.mazerfaker.pewpewboom.util.Constants;
 
+import java.util.ArrayList;
+
 public class DefaulMegaWeapon extends BaseMegaWeapon implements Weapon {
 
     public DefaulMegaWeapon(Bitmap bitmap) {
@@ -27,7 +29,7 @@ class StandardMegaBullet extends Character implements Bullet {
 
 
     public StandardMegaBullet(Bitmap bitmap, float x, float y, int damage) {
-        super(bitmap, null, 0, 0, 0);
+        super(bitmap, new ArrayList<Bitmap>(), null, 0, 0, 0);
         _damage = damage;
         _lifetime = Constants.DEFAULT_MEGA_W_LIFETAIME;
 

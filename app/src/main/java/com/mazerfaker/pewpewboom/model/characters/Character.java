@@ -1,16 +1,20 @@
 package com.mazerfaker.pewpewboom.model.characters;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.RectF;
 
 import com.mazerfaker.pewpewboom.controller.App;
 import com.mazerfaker.pewpewboom.model.Hitbox;
 import com.mazerfaker.pewpewboom.model.weapons.Weapon;
 
+import java.util.Iterator;
+import java.util.List;
+
 
 public class Character {
 
-    public Character(Bitmap bitmap, Weapon weapon, int life, int speed, int points) {
+    public Character(Bitmap bitmap, List<Bitmap> animation, Weapon weapon, int life, int speed, int points) {
         _app = App.getInstance();
         _bitmap = bitmap;
         _life = life;
@@ -19,6 +23,9 @@ public class Character {
         _weapon = weapon;
         _speed = speed;
         _points = points;
+
+        _animationFrames = animation;
+        _animationFramesIterator = _animationFrames.iterator();
     }
 
 
@@ -26,6 +33,21 @@ public class Character {
         _x = x;
         _y = y;
         _hitbox = new Hitbox(_x, _y, _bitmap.getWidth(), _bitmap.getHeight());
+    }
+
+
+    protected void draw(Canvas canvas) {
+        canvas.drawBitmap(_bitmap, _x, _y, null);
+    }
+
+
+    protected boolean drawAnimation(Canvas canvas) {
+        if(_animationFramesIterator.hasNext()) {
+            canvas.drawBitmap(_animationFramesIterator.next(), _x, _y, null);
+            return false;
+        } else {
+            return true;
+        }
     }
 
 
@@ -52,4 +74,7 @@ public class Character {
 
     protected float _halfWidth;
     protected float _halfHeight;
+
+    protected List<Bitmap> _animationFrames;
+    protected Iterator<Bitmap> _animationFramesIterator;
 }

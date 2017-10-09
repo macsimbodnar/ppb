@@ -9,5 +9,6 @@
     <string name="game_rightButton">Right</string>
     <string name="game_fire">Fire</string>
     <string name="game_pause">Pause</string>
+    <string name="game_inital_score">0</string>
 
 </resources>

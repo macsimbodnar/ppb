@@ -37,6 +37,7 @@ public class App {
         _megaBullets = new ArrayList<Bullet>();
         _enemyBullets = new ArrayList<Bullet>();
         _enemies = new ArrayList<Drawable>();
+        _animationToDraw = new ArrayList<Drawable>();
         _gameover = false;
         _megaWeaponCounter = Constants.MEGA_W_RESET; // E' uno perche così il fireButton inizia green e non black
         _megaWeaponReset = Constants.MEGA_W_RESET;
@@ -65,6 +66,7 @@ public class App {
 
         _ship = null;
         _enemies.clear();
+        _animationToDraw.clear();
         _bullets.clear();
         _megaBullets.clear();
         _enemyBullets.clear();
@@ -145,6 +147,8 @@ public class App {
 
             //drawDebug(canvas, b.getHitbox());
         }
+
+        drawAnimation(canvas);
     }
 
 
@@ -214,6 +218,11 @@ public class App {
 
     public boolean isGameOver() {
         return _gameover;
+    }
+
+
+    public void gameOver() {
+        _gameover = true;
     }
 
 
@@ -287,6 +296,7 @@ public class App {
                 if(RectF.intersects(superBulletHitbox, d.getHitbox())) {
                     if(d.hit(b.getDamage())) {
                         updateScore(d.getPoints());
+                        _animationToDraw.add(d);
                         iteratorE.remove();
                     }
                 }
@@ -329,6 +339,7 @@ public class App {
                 if(RectF.intersects(bulletHitbox, enemyHotbox)) {
                     if(d.hit(b.getDamage())) {
                         updateScore(d.getPoints());
+                        _animationToDraw.add(d);
                         iteratorE.remove();
                     }
                     iteratorB.remove();
@@ -360,7 +371,8 @@ public class App {
             // check collision
             if(RectF.intersects(shipHitbox, bulletHitbox)) {
                 if(_ship.hit(b.getDamage())) {
-                    _gameover = true;
+                    //_gameover = true;
+                    _animationToDraw.add(_ship);
                 }
                 iterator.remove();
                 continue;
@@ -375,20 +387,23 @@ public class App {
 
 
     private void shipEnemiesCollisions() {
-
+        Drawable d;
         RectF shipHitbox = _ship.getHitbox();
         RectF enemyHitbox;
 
         // check collision
         for (Iterator<Drawable> iterator = _enemies.iterator(); iterator.hasNext(); ) {
-            enemyHitbox = iterator.next().getHitbox();
+            d = iterator.next();
+            enemyHitbox = d.getHitbox();
 
             if(enemyHitbox.bottom < _shipTop) {
                 break;
             }
 
             if(RectF.intersects(shipHitbox, enemyHitbox)) {
-                _gameover = true;
+                //_gameover = true;
+                _animationToDraw.add(_ship);
+                _animationToDraw.add(d);
                 iterator.remove();
             }
         }
@@ -476,6 +491,20 @@ public class App {
     }
 
 
+    private void drawAnimation(Canvas canvas) {
+        Drawable d;
+
+        for (Iterator<Drawable> iterator = _animationToDraw.iterator(); iterator.hasNext(); ) {
+            d = iterator.next();
+
+            // if animation end remove from List
+            if(d.drawAnimation(canvas)) {
+                iterator.remove();
+            }
+        }
+    }
+
+
     private int _windowWidth;
     private int _windowHeght;
 
@@ -489,6 +518,7 @@ public class App {
     private Background _background;
     private Ship _ship;
     private List<Drawable> _enemies;
+    private List<Drawable> _animationToDraw;
     private List<Bullet> _bullets;
     private List<Bullet> _megaBullets;
     private List<Bullet> _enemyBullets;

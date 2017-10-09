@@ -159,7 +159,7 @@
             android:layout_height="0dp"
             android:background="@android:color/transparent"
             android:gravity="center_vertical"
-            android:text="000"
+            android:text="@string/game_inital_score"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold"

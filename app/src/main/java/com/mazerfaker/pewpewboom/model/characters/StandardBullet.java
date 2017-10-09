@@ -3,10 +3,12 @@ package com.mazerfaker.pewpewboom.model.characters;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
+import java.util.ArrayList;
+
 public class StandardBullet extends Character implements Bullet {
 
     public StandardBullet(Bitmap bitmap, float x, float y, int speed, int damage) {
-        super(bitmap, null, 0, speed, 0);
+        super(bitmap, new ArrayList<Bitmap>(), null, 0, speed, 0);
 
         float initialX = x - (bitmap.getWidth() / 2.0f);
         float initialY;

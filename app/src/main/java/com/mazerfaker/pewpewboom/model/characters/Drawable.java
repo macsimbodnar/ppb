@@ -8,7 +8,7 @@ public interface Drawable {
 
     public void update();
     public void draw(Canvas canvas);
-    //public void reset();
+    public boolean drawAnimation(Canvas canvas);
     public RectF getHitbox();
     public boolean hit(int damage);
     public int getPoints();

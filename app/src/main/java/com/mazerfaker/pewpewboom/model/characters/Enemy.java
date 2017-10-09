@@ -6,13 +6,15 @@ import android.graphics.Canvas;
 import com.mazerfaker.pewpewboom.model.weapons.Weapon;
 import com.mazerfaker.pewpewboom.util.Constants;
 
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 
 
 public class Enemy extends Character implements Drawable {
 
-    public Enemy(Bitmap bitmap, Weapon weapon, int life, int points) {
-        super(bitmap, weapon, life, Constants.SIMPLE_ENEMY_SPEED, points);
+    public Enemy(Bitmap bitmap, List<Bitmap> animation, Weapon weapon, int life, int points) {
+        super(bitmap, animation, weapon, life, Constants.SIMPLE_ENEMY_SPEED, points);
 
         Random random = new Random();
 
@@ -35,7 +37,13 @@ public class Enemy extends Character implements Drawable {
 
     @Override
     public void draw(Canvas canvas) {
-        canvas.drawBitmap(_bitmap, _x, _y, null);
+        super.draw(canvas);
+    }
+
+
+    @Override
+    public boolean drawAnimation(Canvas canvas) {
+       return super.drawAnimation(canvas);
     }
 
 
@@ -46,7 +54,7 @@ public class Enemy extends Character implements Drawable {
 
 
     public Enemy getCopy() {
-        return new Enemy(_bitmap, _weapon, _life, _points);
+        return new Enemy(_bitmap, _animationFrames, _weapon, _life, _points);
     }
 
 
