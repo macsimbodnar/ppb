@@ -11,5 +11,5 @@ public interface Drawable {
     //public void reset();
     public RectF getHitbox();
     public boolean hit(int damage);
-
+    public int getPoints();
 }

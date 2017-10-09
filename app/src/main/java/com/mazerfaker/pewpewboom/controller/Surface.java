@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder.Callback;
+import android.widget.TextView;
 
 import com.mazerfaker.pewpewboom.R;
 import com.mazerfaker.pewpewboom.model.Background;
@@ -20,9 +21,7 @@ import com.mazerfaker.pewpewboom.model.weapons.Weapon;
 import com.mazerfaker.pewpewboom.util.Constants;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 public class Surface extends SurfaceView implements Callback {
@@ -33,6 +32,7 @@ public class Surface extends SurfaceView implements Callback {
     public Surface(Context context) {
         super(context);
         getHolder().addCallback(this); // Important
+
         _mainThread = new MainThread(this);
 
         _app = App.getInstance();
@@ -52,6 +52,8 @@ public class Surface extends SurfaceView implements Callback {
         Ship ship = new Ship(BitmapFactory.decodeResource(getResources(), R.drawable.ship), blaster, defaultMegaWeapon);
 
         _app.setShip(ship);
+
+        setEnemies();
     }
 
 
@@ -119,13 +121,19 @@ public class Surface extends SurfaceView implements Callback {
     private void setEnemies() {
 
         Weapon enemyBlaster = new EnemyBlaster(BitmapFactory.decodeResource(getResources(), R.drawable.bullet2));
-        Enemy enemy = new Enemy(BitmapFactory.decodeResource(getResources(), R.drawable.enemy), enemyBlaster, Constants.SIMPLE_ENEMY_LIFE);
+
+        Enemy enemy = new Enemy(
+                BitmapFactory.decodeResource(getResources(), R.drawable.enemy),
+                enemyBlaster,
+                Constants.SIMPLE_ENEMY_LIFE,
+                Constants.SIMPLE_ENEMY_POINTS);
 
         List<Enemy> enemies = new ArrayList<>();
         enemies.add(enemy);
 
         _app.setEnemyVariety(enemies);
     }
+
 
     private final MainThread _mainThread;
     private App _app;

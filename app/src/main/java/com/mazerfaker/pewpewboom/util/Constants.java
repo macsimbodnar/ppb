@@ -35,4 +35,5 @@ public class Constants {
 
     public final static int SIMPLE_ENEMY_LIFE = 4;
     public final static int SIMPLE_ENEMY_SPEED = 6;
+    public final static int SIMPLE_ENEMY_POINTS = 10;
 }

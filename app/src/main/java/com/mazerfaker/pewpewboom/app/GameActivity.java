@@ -9,6 +9,7 @@ import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.mazerfaker.pewpewboom.R;
 import com.mazerfaker.pewpewboom.controller.Surface;
@@ -100,6 +101,8 @@ public class GameActivity extends Activity {
 
         _continueButton = (Button) findViewById(R.id.continue_button);
         _returnButton = (Button) findViewById(R.id.return_button);
+
+        _scoreView = (TextView) findViewById(R.id.score_view);
     }
 
 
@@ -107,6 +110,7 @@ public class GameActivity extends Activity {
 
         _app = App.getInstance();
         _app.setFireButton(_fire);
+        _app.setScoreView(_scoreView);
 
         boolean continueGame = getIntent().getBooleanExtra(Constants.CONTINUE_GAME, false);
         if(!continueGame) {
@@ -145,9 +149,6 @@ public class GameActivity extends Activity {
         _surface.addTouchables(a);
 
         _gameLayout.addView(_surface);
-
-
-
     }
 
 
@@ -253,6 +254,7 @@ public class GameActivity extends Activity {
     }
 
 
+    private TextView _scoreView;
     private ConstraintLayout _gameLayout;
     private ImageButton _pauseButton;
     private Button _continueButton;

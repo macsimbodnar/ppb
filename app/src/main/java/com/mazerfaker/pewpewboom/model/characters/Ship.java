@@ -12,7 +12,7 @@ public class Ship extends Character implements Drawable {
 
 
     public Ship(Bitmap bitmap, Weapon weapon, Weapon megaWeapon) {
-        super(bitmap, weapon, Constants.SHIP_LIFE, Constants.SHIP_X_SPEED);
+        super(bitmap, weapon, Constants.SHIP_LIFE, Constants.SHIP_X_SPEED, 0);
 
         float initialX = (((float) _app.getWindowWidth()) / 2.0f) - (_bitmap.getWidth() / 2.0f);
         float initialY = ((float) _app.getWindowHeght()) - _bitmap.getHeight() - Constants.SHIP_BOTTOM_PADDING;
@@ -33,6 +33,12 @@ public class Ship extends Character implements Drawable {
     @Override
     public void draw(Canvas canvas) {
         canvas.drawBitmap(_bitmap, _x, _y, null);
+    }
+
+
+    @Override
+    public int getPoints() {
+        return 0;
     }
 
 

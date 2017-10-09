@@ -11,8 +11,8 @@ import java.util.Random;
 
 public class Enemy extends Character implements Drawable {
 
-    public Enemy(Bitmap bitmap, Weapon weapon, int life) {
-        super(bitmap, weapon, life, Constants.SIMPLE_ENEMY_SPEED);
+    public Enemy(Bitmap bitmap, Weapon weapon, int life, int points) {
+        super(bitmap, weapon, life, Constants.SIMPLE_ENEMY_SPEED, points);
 
         Random random = new Random();
 
@@ -24,6 +24,7 @@ public class Enemy extends Character implements Drawable {
         _height = bitmap.getHeight();
     }
 
+
     @Override
     public void update() {
         _y += _speed;
@@ -31,9 +32,21 @@ public class Enemy extends Character implements Drawable {
         fire();
     }
 
+
     @Override
     public void draw(Canvas canvas) {
         canvas.drawBitmap(_bitmap, _x, _y, null);
+    }
+
+
+    @Override
+    public int getPoints() {
+        return _points;
+    }
+
+
+    public Enemy getCopy() {
+        return new Enemy(_bitmap, _weapon, _life, _points);
     }
 
 

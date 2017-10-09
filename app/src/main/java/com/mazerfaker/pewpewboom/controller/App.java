@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.support.constraint.ConstraintLayout;
+import android.widget.TextView;
 
 import com.mazerfaker.pewpewboom.model.Background;
 import com.mazerfaker.pewpewboom.model.characters.Bullet;
@@ -25,6 +26,7 @@ public class App {
 
 
     private App() {
+        _score = 0;
         _windowHeght = 0;
         _windowWidth = 0;
         _moveLeft = false;
@@ -55,6 +57,8 @@ public class App {
 
 
     public void reset() {
+        _score = 0;
+
         _moveLeft = false;
         _moveRight = false;
         _fire = false;
@@ -223,6 +227,11 @@ public class App {
     }
 
 
+    public void setScoreView(TextView scoreView) {
+        _scoreView = scoreView;
+    }
+
+
     public void setBackground(Background background) {
         _background = background;
     }
@@ -277,6 +286,7 @@ public class App {
                 // check collision
                 if(RectF.intersects(superBulletHitbox, d.getHitbox())) {
                     if(d.hit(b.getDamage())) {
+                        updateScore(d.getPoints());
                         iteratorE.remove();
                     }
                 }
@@ -318,6 +328,7 @@ public class App {
                 // check collision
                 if(RectF.intersects(bulletHitbox, enemyHotbox)) {
                     if(d.hit(b.getDamage())) {
+                        updateScore(d.getPoints());
                         iteratorE.remove();
                     }
                     iteratorB.remove();
@@ -442,13 +453,34 @@ public class App {
 
     private void addEnemy() {
         // TODO ovviamente da migliorare
-        addEnemy(_enemyVariety.get(0));
+        addEnemy(_enemyVariety.get(0).getCopy());
+    }
+
+
+    private void updateScore(int add) {
+        _score += add;
+        drawScore();
+    }
+
+
+    private void drawScore() {
+
+        _scoreView.post(new Runnable() {
+
+            @Override
+            public void run() {
+                _scoreView.setText("" + _score);
+            }
+
+        });
     }
 
 
     private int _windowWidth;
     private int _windowHeght;
+
     private ConstraintLayout _fireButton;
+    private TextView _scoreView;
 
     private boolean _moveLeft;
     private boolean _moveRight;
@@ -470,4 +502,6 @@ public class App {
 
     private int _enemySpawnRate;
     private int _enemySpawnCount;
+
+    private int _score;
 }

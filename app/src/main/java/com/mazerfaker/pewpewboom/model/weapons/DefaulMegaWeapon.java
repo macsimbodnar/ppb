@@ -27,7 +27,7 @@ class StandardMegaBullet extends Character implements Bullet {
 
 
     public StandardMegaBullet(Bitmap bitmap, float x, float y, int damage) {
-        super(bitmap, null, 0, 0);
+        super(bitmap, null, 0, 0, 0);
         _damage = damage;
         _lifetime = Constants.DEFAULT_MEGA_W_LIFETAIME;
 
