@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/border"
-    tools:context="com.mazerfaker.pewpewboom.app.MainMenuActivity">
+    tools:context="com.mazerfaker.pewpewboom.activities.MainMenuActivity">
 
 
     <Button

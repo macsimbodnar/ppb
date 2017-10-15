@@ -1,4 +1,4 @@
-package com.mazerfaker.pewpewboom.app;
+package com.mazerfaker.pewpewboom.activities;
 
 import android.app.Activity;
 import android.os.Bundle;

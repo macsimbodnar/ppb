@@ -39,8 +39,9 @@ public class Ship extends Character implements Drawable {
 
 
     @Override
-    public boolean drawAnimation(Canvas canvas) {
+    public boolean afterDeadDraw(Canvas canvas) {
         if(_animationFramesIterator.hasNext()) {
+            // TODO da risolvere che la bitmap dell'animazione è sfasata;
             _bitmap = _animationFramesIterator.next();
             return false;
         } else {
@@ -51,10 +52,15 @@ public class Ship extends Character implements Drawable {
 
 
     @Override
-    public int getPoints() {
-        return 0;
+    public boolean onHit(int damage) {
+        return super.onHit(damage);
     }
 
+
+    @Override
+    public void onDead() {
+        // TODO
+    }
 
     public void megafire() {
         _app.addMegaBullet(_megaWeapon.fire(_x + _halfWidth, _y));

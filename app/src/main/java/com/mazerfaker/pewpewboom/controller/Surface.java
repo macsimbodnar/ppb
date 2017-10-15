@@ -60,7 +60,7 @@ public class Surface extends SurfaceView implements Callback {
                 retray = false;
 
             } catch(InterruptedException e) {
-                Log.e(TAG, "SURFACEdESTROYER METHOD - CANT JOIN THE MAINTHRAD");
+                Log.e(TAG, "SURFACEDESTROYER METHOD - CANT JOIN THE MAIN THREAD");
                 e.printStackTrace();
             }
         }
@@ -124,8 +124,16 @@ public class Surface extends SurfaceView implements Callback {
 
         List<Bitmap> boomAnimation = new ArrayList<>();
         boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom1));
+        boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom1));
+        boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom1));
+        boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom2));
+        boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom2));
         boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom2));
         boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom3));
+        boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom3));
+        boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom3));
+        boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom4));
+        boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom4));
         boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom4));
 
         Ship ship = new Ship(BitmapFactory.decodeResource(getResources(), R.drawable.ship), boomAnimation, blaster, defaultMegaWeapon);
@@ -141,8 +149,16 @@ public class Surface extends SurfaceView implements Callback {
         List<Bitmap> boomAnimation = new ArrayList<>();
 
         boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom1));
+        boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom1));
+        boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom1));
+        boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom2));
+        boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom2));
         boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom2));
         boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom3));
+        boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom3));
+        boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom3));
+        boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom4));
+        boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom4));
         boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom4));
 
         Enemy enemy = new Enemy(

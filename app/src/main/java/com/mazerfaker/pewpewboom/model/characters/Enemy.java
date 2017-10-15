@@ -42,14 +42,20 @@ public class Enemy extends Character implements Drawable {
 
 
     @Override
-    public boolean drawAnimation(Canvas canvas) {
-       return super.drawAnimation(canvas);
+    public boolean afterDeadDraw(Canvas canvas) {
+       return super.afterDeadDraw(canvas);
     }
 
 
     @Override
-    public int getPoints() {
-        return _points;
+    public boolean onHit(int damage) {
+        return super.onHit(damage);
+    }
+
+
+    @Override
+    public void onDead() {
+        super.onDead();
     }
 
 

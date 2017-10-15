@@ -265,6 +265,12 @@ public class App {
     }
 
 
+    public void updateScore(int add) {
+        _score += add;
+        drawScore();
+    }
+
+
     private void checkCollisions() {
         megaBulletsCollision();
         enemyBulletsCollisons();
@@ -294,8 +300,8 @@ public class App {
 
                 // check collision
                 if(RectF.intersects(superBulletHitbox, d.getHitbox())) {
-                    if(d.hit(b.getDamage())) {
-                        updateScore(d.getPoints());
+                    if(d.onHit(b.getDamage())) {
+                        d.onDead();
                         _animationToDraw.add(d);
                         iteratorE.remove();
                     }
@@ -337,8 +343,8 @@ public class App {
 
                 // check collision
                 if(RectF.intersects(bulletHitbox, enemyHotbox)) {
-                    if(d.hit(b.getDamage())) {
-                        updateScore(d.getPoints());
+                    if(d.onHit(b.getDamage())) {
+                        d.onDead();
                         _animationToDraw.add(d);
                         iteratorE.remove();
                     }
@@ -370,8 +376,8 @@ public class App {
 
             // check collision
             if(RectF.intersects(shipHitbox, bulletHitbox)) {
-                if(_ship.hit(b.getDamage())) {
-                    //_gameover = true;
+                if(_ship.onHit(b.getDamage())) {
+                    _ship.onDead();
                     _animationToDraw.add(_ship);
                 }
                 iterator.remove();
@@ -401,7 +407,8 @@ public class App {
             }
 
             if(RectF.intersects(shipHitbox, enemyHitbox)) {
-                //_gameover = true;
+                d.onDead();
+                _ship.onDead();
                 _animationToDraw.add(_ship);
                 _animationToDraw.add(d);
                 iterator.remove();
@@ -472,12 +479,6 @@ public class App {
     }
 
 
-    private void updateScore(int add) {
-        _score += add;
-        drawScore();
-    }
-
-
     private void drawScore() {
 
         _scoreView.post(new Runnable() {
@@ -498,7 +499,7 @@ public class App {
             d = iterator.next();
 
             // if animation end remove from List
-            if(d.drawAnimation(canvas)) {
+            if(d.afterDeadDraw(canvas)) {
                 iterator.remove();
             }
         }

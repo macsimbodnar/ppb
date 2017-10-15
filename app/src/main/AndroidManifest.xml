@@ -14,7 +14,7 @@
 
         <!-- Main Menu -->
         <activity
-            android:name=".app.MainMenuActivity"
+            android:name=".activities.MainMenuActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait">
             <!--android:theme="@style/FullscreenTheme" -->
@@ -30,13 +30,13 @@
 
         <!-- Game -->
         <activity
-            android:name=".app.GameActivity"
+            android:name=".activities.GameActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait" >
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.mazerfaker.pewpewboom.app.MainMenuActivity" />
+                android:value="com.mazerfaker.pewpewboom.activities.MainMenuActivity" />
             </activity>
             <!--android:theme="@style/FullscreenTheme" -->
 

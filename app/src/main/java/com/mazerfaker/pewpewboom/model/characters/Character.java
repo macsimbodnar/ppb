@@ -41,7 +41,7 @@ public class Character {
     }
 
 
-    protected boolean drawAnimation(Canvas canvas) {
+    protected boolean afterDeadDraw(Canvas canvas) {
         if(_animationFramesIterator.hasNext()) {
             canvas.drawBitmap(_animationFramesIterator.next(), _x, _y, null);
             return false;
@@ -56,11 +56,17 @@ public class Character {
     }
 
 
-    public boolean hit(int damage) {
+    public boolean onHit(int damage) {
         _life -= damage;
 
         return _life <= 0;
     }
+
+
+    public void onDead() {
+        _app.updateScore(_points);
+    }
+
 
     protected Bitmap _bitmap;
     protected float _x;
