@@ -6,9 +6,7 @@ public class Hitbox {
 
 
     public Hitbox(int left, int top, int width, int height) {
-        _width = width;
-        _height = height;
-        _hitbox = new Rect(left, top, left + _width, top + _height);
+        _hitbox = new Rect(left, top, left + width, top + height);
     }
 
 
@@ -33,6 +31,4 @@ public class Hitbox {
 
 
     private Rect _hitbox;
-    private int _width;
-    private int _height;
 }
