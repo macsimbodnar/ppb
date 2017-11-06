@@ -18,7 +18,7 @@ public class DefaultMegaWeapon extends BaseMegaWeapon implements Weapon {
 
 
     @Override
-    public Bullet fire(float x, float y) {
+    public Bullet fire(int x, int y) {
         return new StandardMegaBullet(_bulletBitmap, x, y, _damage);
     }
 
@@ -28,13 +28,13 @@ public class DefaultMegaWeapon extends BaseMegaWeapon implements Weapon {
 class StandardMegaBullet extends Character implements Bullet {
 
 
-    public StandardMegaBullet(Bitmap bitmap, float x, float y, int damage) {
+    public StandardMegaBullet(Bitmap bitmap, int x, int y, int damage) {
         super(bitmap, new ArrayList<Bitmap>(), null, 0, 0, 0);
         _damage = damage;
         _lifetime = Constants.DEFAULT_MEGA_W_LIFETAIME;
 
-        float initialX = x - (bitmap.getWidth() / 2.0f);
-        float initialY = y - bitmap.getHeight();
+        int initialX = x - (bitmap.getWidth() / 2);
+        int initialY = y - bitmap.getHeight();
         initHitbox(initialX, initialY);
     }
 

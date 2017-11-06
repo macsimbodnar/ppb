@@ -6,7 +6,6 @@ import android.graphics.Canvas;
 import com.mazerfaker.pewpewboom.model.weapons.Weapon;
 import com.mazerfaker.pewpewboom.util.Constants;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -19,8 +18,8 @@ public class Enemy extends Character implements Drawable {
         Random random = new Random();
 
         int max = _app.getWindowWidth() - bitmap.getWidth();
-        float initialX = random.nextInt(max);
-        float initialY = - bitmap.getHeight();
+        int initialX = random.nextInt(max);
+        int initialY = - bitmap.getHeight();
 
         initHitbox(initialX, initialY);
         _height = bitmap.getHeight();
@@ -76,5 +75,5 @@ public class Enemy extends Character implements Drawable {
     }
 
 
-    private float _height;
+    private int _height;
 }

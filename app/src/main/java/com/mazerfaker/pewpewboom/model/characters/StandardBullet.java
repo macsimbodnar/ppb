@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 public class StandardBullet extends Character implements Bullet {
 
-    public StandardBullet(Bitmap bitmap, float x, float y, int speed, int damage) {
+    public StandardBullet(Bitmap bitmap, int x, int y, int speed, int damage) {
         super(bitmap, new ArrayList<Bitmap>(), null, 0, speed, 0);
 
-        float initialX = x - (bitmap.getWidth() / 2.0f);
-        float initialY;
+        int initialX = x - (bitmap.getWidth() / 2);
+        int initialY;
         if(speed > 0) {
             initialY = y - bitmap.getHeight();
         } else {
@@ -46,6 +46,7 @@ public class StandardBullet extends Character implements Bullet {
     public int getLifetime() {
         return -1;
     }
+
 
     private int _damage;
 }

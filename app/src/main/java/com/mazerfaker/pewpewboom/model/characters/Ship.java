@@ -16,8 +16,8 @@ public class Ship extends Character implements Drawable {
     public Ship(Bitmap bitmap, List<Bitmap> animation, Weapon weapon, Weapon megaWeapon) {
         super(bitmap, animation, weapon, Constants.SHIP_LIFE, Constants.SHIP_X_SPEED, 0);
 
-        float initialX = (((float) _app.getWindowWidth()) / 2.0f) - (_bitmap.getWidth() / 2.0f);
-        float initialY = ((float) _app.getWindowHeght()) - _bitmap.getHeight() - Constants.SHIP_BOTTOM_PADDING;
+        int initialX = ((_app.getWindowWidth()) / 2) - (_bitmap.getWidth() / 2);
+        int initialY = (_app.getWindowHeght()) - _bitmap.getHeight() - Constants.SHIP_BOTTOM_PADDING;
 
         initHitbox(initialX, initialY);
 

@@ -4,7 +4,7 @@ package com.mazerfaker.pewpewboom.controller;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.RectF;
+import android.graphics.Rect;
 import android.support.constraint.ConstraintLayout;
 import android.widget.TextView;
 
@@ -286,7 +286,7 @@ public class App {
 
         for (Iterator<Bullet> iteratorB = _megaBullets.iterator(); iteratorB.hasNext(); ) {
             b = iteratorB.next();
-            RectF superBulletHitbox = b.getHitbox();
+            Rect superBulletHitbox = b.getHitbox();
 
             // check if megabulllet time is end
             if(b.getLifetime() == 0) {
@@ -299,7 +299,7 @@ public class App {
                 d = iteratorE.next();
 
                 // check collision
-                if(RectF.intersects(superBulletHitbox, d.getHitbox())) {
+                if(Rect.intersects(superBulletHitbox, d.getHitbox())) {
                     if(d.onHit(b.getDamage())) {
                         d.onDead();
                         _animationToDraw.add(d);
@@ -313,7 +313,7 @@ public class App {
                 eb = iteratorEB.next();
 
                 // check collision
-                if(RectF.intersects(superBulletHitbox, eb.getHitbox())) {
+                if(Rect.intersects(superBulletHitbox, eb.getHitbox())) {
                     iteratorEB.remove();
                 }
             }
@@ -324,8 +324,8 @@ public class App {
     private void enemyBulletsCollisons() {
         Bullet b;
         Drawable d;
-        RectF enemyHotbox;
-        RectF bulletHitbox;
+        Rect enemyHotbox;
+        Rect bulletHitbox;
 
         for (Iterator<Bullet> iteratorB = _bullets.iterator(); iteratorB.hasNext(); ) {
             b = iteratorB.next();
@@ -342,7 +342,7 @@ public class App {
                 enemyHotbox = d.getHitbox();
 
                 // check collision
-                if(RectF.intersects(bulletHitbox, enemyHotbox)) {
+                if(Rect.intersects(bulletHitbox, enemyHotbox)) {
                     if(d.onHit(b.getDamage())) {
                         d.onDead();
                         _animationToDraw.add(d);
@@ -363,8 +363,8 @@ public class App {
 
     private void shipBulletsCollisions() {
         Bullet b;
-        RectF shipHitbox = _ship.getHitbox();
-        RectF bulletHitbox;
+        Rect shipHitbox = _ship.getHitbox();
+        Rect bulletHitbox;
 
         for (Iterator<Bullet> iterator = _enemyBullets.iterator(); iterator.hasNext(); ) {
             b = iterator.next();
@@ -375,7 +375,7 @@ public class App {
             }
 
             // check collision
-            if(RectF.intersects(shipHitbox, bulletHitbox)) {
+            if(Rect.intersects(shipHitbox, bulletHitbox)) {
                 if(_ship.onHit(b.getDamage())) {
                     _ship.onDead();
                     _animationToDraw.add(_ship);
@@ -394,8 +394,8 @@ public class App {
 
     private void shipEnemiesCollisions() {
         Drawable d;
-        RectF shipHitbox = _ship.getHitbox();
-        RectF enemyHitbox;
+        Rect shipHitbox = _ship.getHitbox();
+        Rect enemyHitbox;
 
         // check collision
         for (Iterator<Drawable> iterator = _enemies.iterator(); iterator.hasNext(); ) {
@@ -406,7 +406,7 @@ public class App {
                 break;
             }
 
-            if(RectF.intersects(shipHitbox, enemyHitbox)) {
+            if(Rect.intersects(shipHitbox, enemyHitbox)) {
                 d.onDead();
                 _ship.onDead();
                 _animationToDraw.add(_ship);
@@ -417,7 +417,7 @@ public class App {
     }
 
 
-    private void drawDebug(Canvas c, RectF hitbox) {
+    private void drawDebug(Canvas c, Rect hitbox) {
         Paint paint = new Paint();
         paint.setColor(Color.BLUE);
         c.drawRect(hitbox, paint);

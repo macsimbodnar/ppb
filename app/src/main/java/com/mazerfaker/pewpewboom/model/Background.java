@@ -40,7 +40,7 @@ public class Background {
     }
 
 
-    private float _y;
+    private int _y;
     private Bitmap _bitmap;
     private int _bitmapHeight;
     private int _backgroundSpeed;

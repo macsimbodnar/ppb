@@ -1,43 +1,38 @@
 package com.mazerfaker.pewpewboom.model;
 
-import android.graphics.RectF;
+import android.graphics.Rect;
 
 public class Hitbox {
 
 
-    public Hitbox(float left, float top, float width, float height) {
+    public Hitbox(int left, int top, int width, int height) {
         _width = width;
         _height = height;
-        _hitbox = new RectF(left, top, left + _width, top + _height);
+        _hitbox = new Rect(left, top, left + _width, top + _height);
     }
 
 
-    public void update(float left, float top) {
+    public void update(int left, int top) {
         _hitbox.offsetTo(left, top);
     }
 
 
-    public void updateX(float left) {
+    public void updateX(int left) {
         _hitbox.offsetTo(left, _hitbox.top);
     }
 
 
-    public void updateY(float top) {
+    public void updateY(int top) {
         _hitbox.offsetTo(_hitbox.left, top);
     }
 
 
-    public boolean checkCollision(RectF hitbox){
-        return _hitbox.intersect(hitbox);
-    }
-
-
-    public RectF getRect() {
+    public Rect getRect() {
         return _hitbox;
     }
 
 
-    private RectF _hitbox;
-    private float _width;
-    private float _height;
+    private Rect _hitbox;
+    private int _width;
+    private int _height;
 }

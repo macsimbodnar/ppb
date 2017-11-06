@@ -2,7 +2,7 @@ package com.mazerfaker.pewpewboom.model.characters;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.RectF;
+import android.graphics.Rect;
 
 import com.mazerfaker.pewpewboom.controller.App;
 import com.mazerfaker.pewpewboom.model.Hitbox;
@@ -18,8 +18,8 @@ public class Character {
         _app = App.getInstance();
         _bitmap = bitmap;
         _life = life;
-        _halfWidth = _bitmap.getWidth() / 2.0f;
-        _halfHeight = _bitmap.getHeight() / 2.0f;
+        _halfWidth = _bitmap.getWidth() / 2;
+        _halfHeight = _bitmap.getHeight() / 2;
         _weapon = weapon;
         _speed = speed;
         _points = points;
@@ -29,7 +29,7 @@ public class Character {
     }
 
 
-    protected void initHitbox(float x, float y) {
+    protected void initHitbox(int x, int y) {
         _x = x;
         _y = y;
         _hitbox = new Hitbox(_x, _y, _bitmap.getWidth(), _bitmap.getHeight());
@@ -51,7 +51,7 @@ public class Character {
     }
 
 
-    public RectF getHitbox() {
+    public Rect getHitbox() {
         return _hitbox.getRect();
     }
 
@@ -69,8 +69,8 @@ public class Character {
 
 
     protected Bitmap _bitmap;
-    protected float _x;
-    protected float _y;
+    protected int _x;
+    protected int _y;
     protected Hitbox _hitbox;
     protected int _life;
     protected Weapon _weapon;
@@ -78,8 +78,8 @@ public class Character {
     protected int _speed;
     protected int _points;
 
-    protected float _halfWidth;
-    protected float _halfHeight;
+    protected int _halfWidth;
+    protected int _halfHeight;
 
     protected List<Bitmap> _animationFrames;
     protected Iterator<Bitmap> _animationFramesIterator;

@@ -16,7 +16,7 @@ public class EnemyBlaster extends BaseWeapon implements Weapon {
 
 
     @Override
-    public StandardBullet fire(float x, float y) {
+    public StandardBullet fire(int x, int y) {
         tick();
 
         if(_fireCount != 0) {
