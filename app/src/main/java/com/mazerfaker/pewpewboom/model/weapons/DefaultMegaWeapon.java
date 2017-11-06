@@ -10,9 +10,9 @@ import com.mazerfaker.pewpewboom.util.Constants;
 
 import java.util.ArrayList;
 
-public class DefaulMegaWeapon extends BaseMegaWeapon implements Weapon {
+public class DefaultMegaWeapon extends BaseMegaWeapon implements Weapon {
 
-    public DefaulMegaWeapon(Bitmap bitmap) {
+    public DefaultMegaWeapon(Bitmap bitmap) {
         super(bitmap, Constants.DEFAULT_MEGA_W_DAMAGE);
     }
 

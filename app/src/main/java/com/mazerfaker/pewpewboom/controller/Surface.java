@@ -8,14 +8,13 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder.Callback;
-import android.widget.TextView;
 
 import com.mazerfaker.pewpewboom.R;
 import com.mazerfaker.pewpewboom.model.Background;
 import com.mazerfaker.pewpewboom.model.characters.Enemy;
 import com.mazerfaker.pewpewboom.model.characters.Ship;
 import com.mazerfaker.pewpewboom.model.weapons.Blaster;
-import com.mazerfaker.pewpewboom.model.weapons.DefaulMegaWeapon;
+import com.mazerfaker.pewpewboom.model.weapons.DefaultMegaWeapon;
 import com.mazerfaker.pewpewboom.model.weapons.EnemyBlaster;
 import com.mazerfaker.pewpewboom.model.weapons.Weapon;
 import com.mazerfaker.pewpewboom.util.Constants;
@@ -120,7 +119,7 @@ public class Surface extends SurfaceView implements Callback {
         Bitmap laser = BitmapFactory.decodeResource(getResources(), R.drawable.laser);
         Bitmap scaledLaser = Bitmap.createScaledBitmap(laser, laser.getWidth(), _app.getWindowHeght(), true);
 
-        Weapon defaultMegaWeapon = new DefaulMegaWeapon(scaledLaser);
+        Weapon defaultMegaWeapon = new DefaultMegaWeapon(scaledLaser);
 
         List<Bitmap> boomAnimation = new ArrayList<>();
         boomAnimation.add(BitmapFactory.decodeResource(getResources(), R.drawable.boom1));
