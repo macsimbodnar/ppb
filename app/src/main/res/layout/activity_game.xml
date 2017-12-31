@@ -40,7 +40,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical" />
+                android:orientation="vertical" >
+
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/game_right"
@@ -90,6 +92,16 @@
             tools:layout_constraintTop_creator="1" />
 
     </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/fps_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/game_inital_score"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/pause_menu_container"

@@ -4,8 +4,6 @@ import android.graphics.Canvas;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
-import com.mazerfaker.pewpewboom.util.Constants;
-
 public class MainThread extends Thread {
 
     private static final String TAG = "MainThread";
@@ -17,6 +15,9 @@ public class MainThread extends Thread {
         _surfaceHolder = surface.getHolder();
         _isRunning = true;
         _pause = false;
+        _currentTime = 0;
+        _deltaTime = 0;
+        _frameCounter = 0;
     }
 
 
@@ -26,8 +27,12 @@ public class MainThread extends Thread {
         Canvas canvas;
         App app = App.getInstance();
 
+        _deltaTime = System.currentTimeMillis();
+
         synchronized (this) {
             while (_isRunning) {
+
+                _currentTime = System.currentTimeMillis();
 
                 if (_pause) {
                     try {
@@ -45,18 +50,21 @@ public class MainThread extends Thread {
                 try {
 
                     canvas = _surfaceHolder.lockCanvas();
-                    //synchronized (_surfaceHolder) {
-                      //  synchronized (App.getInstance()) {
+                    _surface.update();
+                    _surface.draw(canvas);
 
-                            _surface.update();
-                            _surface.draw(canvas);
+                    _frameCounter++;
 
-                            if (app.isGameOver()) {
-                                return;
-                            }
-                        //}
+                    if(_currentTime - _deltaTime >= 1000) {
+                        _surface.fps = _frameCounter;
+                        _surface.drawFPS();
+                        _deltaTime = System.currentTimeMillis();
+                        _frameCounter = 0;
+                    }
 
-                    //}
+                    if (app.isGameOver()) {
+                        return;
+                    }
 
                 } catch (Exception e) {
 
@@ -88,4 +96,7 @@ public class MainThread extends Thread {
     private Surface _surface;
     private boolean _pause;
     private boolean _isRunning;
+    private long _currentTime;
+    private long _deltaTime;
+    private int _frameCounter;
 }

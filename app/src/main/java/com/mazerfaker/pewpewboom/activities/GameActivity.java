@@ -103,6 +103,8 @@ public class GameActivity extends Activity {
         _returnButton = (Button) findViewById(R.id.return_button);
 
         _scoreView = (TextView) findViewById(R.id.score_view);
+
+        _fpsView = (TextView) findViewById(R.id.fps_view);
     }
 
 
@@ -143,6 +145,8 @@ public class GameActivity extends Activity {
     private void initSurface() {
 
         _surface = new Surface(getApplicationContext());
+
+        _surface.setFPSView(_fpsView);
 
         ArrayList<View> a = new ArrayList<>();
         a.add(_pauseButton);
@@ -255,6 +259,7 @@ public class GameActivity extends Activity {
 
 
     private TextView _scoreView;
+    private TextView _fpsView;
     private ConstraintLayout _gameLayout;
     private ImageButton _pauseButton;
     private Button _continueButton;

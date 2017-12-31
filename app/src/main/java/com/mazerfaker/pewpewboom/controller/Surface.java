@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder.Callback;
+import android.widget.TextView;
 
 import com.mazerfaker.pewpewboom.R;
 import com.mazerfaker.pewpewboom.model.Background;
@@ -31,6 +32,8 @@ public class Surface extends SurfaceView implements Callback {
     public Surface(Context context) {
         super(context);
         getHolder().addCallback(this); // Important
+
+        fps = 0;
 
         _mainThread = new MainThread(this);
 
@@ -100,6 +103,22 @@ public class Surface extends SurfaceView implements Callback {
         // Need to resume before to terminate correctly thread
         resume();
         _mainThread.stopGame();
+    }
+
+
+    public void drawFPS() {
+        _fpsView.post(new Runnable() {
+            @Override
+            public void run() {
+                _fpsView.setText("" + fps);
+            }
+
+        });
+    }
+
+
+    public void setFPSView(TextView fpsView) {
+        _fpsView = fpsView;
     }
 
 
@@ -176,4 +195,7 @@ public class Surface extends SurfaceView implements Callback {
 
     private final MainThread _mainThread;
     private App _app;
+    private TextView _fpsView;
+
+    public int fps;
 }
